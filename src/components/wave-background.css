@@ -1,0 +1,178 @@
+.wave-bg {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(135deg, #0f2a42 0%, #184568 50%, #0f2a42 100%);
+}
+
+.wave-bg__content {
+  position: relative;
+  z-index: 5;
+  min-height: 100vh;
+}
+
+.wave-bg__base {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #0f2a42 0%, #184568 50%, #0f2a42 100%);
+  z-index: 0;
+}
+
+.wave-bg__radial {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.55;
+  z-index: 1;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.wave-bg__radial--one {
+  width: 520px;
+  height: 520px;
+  left: -120px;
+  top: -100px;
+  background: radial-gradient(circle, rgba(227, 239, 251, 0.18) 0%, rgba(24, 69, 104, 0.1) 45%, transparent 75%);
+  animation: floatBlobOne 12s infinite;
+}
+
+.wave-bg__radial--two {
+  width: 480px;
+  height: 480px;
+  right: -100px;
+  top: 20%;
+  background: radial-gradient(circle, rgba(193, 224, 246, 0.18) 0%, rgba(15, 42, 66, 0.08) 45%, transparent 75%);
+  animation: floatBlobTwo 14s infinite;
+}
+
+.wave-bg__radial--three {
+  width: 560px;
+  height: 560px;
+  left: 25%;
+  bottom: -180px;
+  background: radial-gradient(circle, rgba(227, 239, 251, 0.12) 0%, rgba(15, 42, 66, 0.08) 48%, transparent 75%);
+  animation: floatBlobThree 16s infinite;
+}
+
+.wave-bg__rings {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0.7);
+  border: 2px solid rgba(227, 239, 251, 0.16);
+  box-shadow:
+    0 0 25px rgba(227, 239, 251, 0.1),
+    inset 0 0 18px rgba(193, 224, 246, 0.04);
+  animation: pulseRing 8s linear infinite;
+}
+
+.ring--1 {
+  width: 240px;
+  height: 240px;
+  animation-delay: 0s;
+}
+
+.ring--2 {
+  width: 380px;
+  height: 380px;
+  animation-delay: 2s;
+}
+
+.ring--3 {
+  width: 520px;
+  height: 520px;
+  animation-delay: 4s;
+}
+
+.ring--4 {
+  width: 680px;
+  height: 680px;
+  animation-delay: 6s;
+}
+
+.wave-bg__light {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgba(227, 239, 251, 0.12) 0%,
+    rgba(193, 224, 246, 0.06) 20%,
+    transparent 55%
+  );
+}
+
+.wave-bg__grid {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  opacity: 0.16;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 34px 34px;
+}
+
+@keyframes pulseRing {
+  0% {
+    transform: translate(-50%, -50%) scale(0.72);
+    opacity: 0.05;
+  }
+  20% {
+    opacity: 0.18;
+  }
+  55% {
+    opacity: 0.12;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.14);
+    opacity: 0;
+  }
+}
+
+@keyframes floatBlobOne {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(40px, 30px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes floatBlobTwo {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-35px, 45px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes floatBlobThree {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(20px, -35px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
