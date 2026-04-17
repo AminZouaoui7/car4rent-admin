@@ -4,7 +4,8 @@ import {
   refreshAdminToken,
 } from "./authService";
 
-const API_BASE_URL = "http://localhost:5167/api";
+const API_BASE_URL =
+  import.meta.env.VITE_API_URL || "http://localhost:5167/api";
 
 export async function adminFetch(endpoint: string, options: RequestInit = {}) {
   let token = getAdminAccessToken();
@@ -12,7 +13,7 @@ export async function adminFetch(endpoint: string, options: RequestInit = {}) {
   const buildHeaders = () => {
     const headers: Record<string, string> = {
       ...(token ? { Authorization: `Bearer ${token}` } : {}),
-      ...(options.headers as Record<string, string> | undefined),
+      ...((options.headers as Record<string, string>) || {}),
     };
 
     const hasBody = options.body !== undefined && options.body !== null;

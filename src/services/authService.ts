@@ -1,4 +1,5 @@
-const API_BASE_URL = "http://localhost:5167/api";
+const API_BASE_URL =
+  import.meta.env.VITE_API_URL || "http://localhost:5167/api";
 
 const ACCESS_TOKEN_KEY = "admin_access_token";
 const REFRESH_TOKEN_KEY = "admin_refresh_token";
@@ -16,7 +17,9 @@ export type AdminAuthResponse = {
   accessTokenExpiresAtUtc: string;
 };
 
-export async function adminLogin(payload: AdminLoginPayload): Promise<AdminAuthResponse> {
+export async function adminLogin(
+  payload: AdminLoginPayload
+): Promise<AdminAuthResponse> {
   const response = await fetch(`${API_BASE_URL}/auth/admin-login`, {
     method: "POST",
     headers: {
@@ -25,7 +28,7 @@ export async function adminLogin(payload: AdminLoginPayload): Promise<AdminAuthR
     body: JSON.stringify(payload),
   });
 
-  const data = await response.json();
+  const data = await response.json().catch(() => ({}));
 
   if (!response.ok) {
     throw new Error(data.message || "Login failed");
@@ -40,12 +43,10 @@ export function saveAdminSession(data: AdminAuthResponse) {
   localStorage.setItem(ACCESS_TOKEN_EXPIRES_KEY, data.accessTokenExpiresAtUtc);
 }
 
-// nouveau nom
 export function getAdminAccessToken() {
   return localStorage.getItem(ACCESS_TOKEN_KEY);
 }
 
-// ancien nom gardé pour compatibilité
 export function getAdminToken() {
   return getAdminAccessToken();
 }
@@ -64,7 +65,6 @@ export function clearAdminSession() {
   localStorage.removeItem(ACCESS_TOKEN_EXPIRES_KEY);
 }
 
-// ancien nom gardé pour compatibilité
 export function removeAdminToken() {
   clearAdminSession();
 }
@@ -116,7 +116,6 @@ export async function adminLogout() {
         body: JSON.stringify({ refreshToken }),
       });
     } catch {
-      // ignore
     }
   }
 
