@@ -31,7 +31,20 @@ type Vehicle = {
   available: boolean;
   brand?: string;
   model?: string;
+  slug?: string;
+  basePriceDay?: number;
+  gearbox?: string;
+  fuel?: string;
+  seats?: number;
+  bags?: number;
   image?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  categoryId?: string;
+  category?: {
+    id: string;
+    name: string;
+  } | null;
 };
 
 type FlowItem = {
@@ -165,6 +178,10 @@ function getPaymentClassName(booking: Booking) {
   return "pending";
 }
 
+function getVehicleName(vehicle: Vehicle) {
+  return `${vehicle.brand || ""} ${vehicle.model || ""}`.trim() || "Véhicule";
+}
+
 export default function DashboardPage() {
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
@@ -174,7 +191,7 @@ export default function DashboardPage() {
   const [periodFilter, setPeriodFilter] = useState<PeriodFilter>("all");
 
   useEffect(() => {
-    loadDashboardData();
+    void loadDashboardData();
   }, []);
 
   async function loadDashboardData() {
@@ -184,14 +201,21 @@ export default function DashboardPage() {
 
       const [bookingsRes, vehiclesRes] = await Promise.all([
         adminFetch("/bookings"),
-        adminFetch("/vehicles"),
+        adminFetch("/vehicles/admin/all"),
       ]);
 
-      const bookingsData = await bookingsRes.json();
-      const vehiclesData = await vehiclesRes.json();
+      const bookingsData = await bookingsRes.json().catch(() => []);
+      const vehiclesData = await vehiclesRes.json().catch(() => []);
+
+      const normalizedVehicles: Vehicle[] = Array.isArray(vehiclesData)
+        ? vehiclesData.map((vehicle: any) => ({
+            ...vehicle,
+            categoryId: vehicle.categoryId || vehicle.category?.id || "",
+          }))
+        : [];
 
       setBookings(Array.isArray(bookingsData) ? bookingsData : []);
-      setVehicles(Array.isArray(vehiclesData) ? vehiclesData : []);
+      setVehicles(normalizedVehicles);
     } catch (err: any) {
       setError(err?.message || "Erreur lors du chargement du tableau de bord.");
     } finally {
@@ -346,6 +370,16 @@ export default function DashboardPage() {
       .slice(0, 6);
   }, [bookings]);
 
+  const recentVehicles = useMemo(() => {
+    return [...vehicles]
+      .sort((a, b) => {
+        const aTime = new Date(a.updatedAt || a.createdAt || 0).getTime();
+        const bTime = new Date(b.updatedAt || b.createdAt || 0).getTime();
+        return bTime - aTime;
+      })
+      .slice(0, 6);
+  }, [vehicles]);
+
   const range = useMemo(() => {
     const today = startOfDay(new Date());
 
@@ -425,7 +459,7 @@ export default function DashboardPage() {
             <button
               type="button"
               className="dashboard-btn dashboard-btn--primary"
-              onClick={loadDashboardData}
+              onClick={() => void loadDashboardData()}
               disabled={loading}
             >
               {loading ? "Chargement..." : "Actualiser les données"}
@@ -465,84 +499,84 @@ export default function DashboardPage() {
       )}
 
       <section className="dashboard-kpi-showcase">
-  <div className="dashboard-kpi-showcase__main">
-    <div className="dashboard-kpi-showcase__main-top">
-      <span className="dashboard-kpi-showcase__eyebrow">Vue d’ensemble</span>
-      <span className="dashboard-kpi-showcase__status">
-        {bookings.length} réservations enregistrées
-      </span>
-    </div>
+        <div className="dashboard-kpi-showcase__main">
+          <div className="dashboard-kpi-showcase__main-top">
+            <span className="dashboard-kpi-showcase__eyebrow">Vue d’ensemble</span>
+            <span className="dashboard-kpi-showcase__status">
+              {bookings.length} réservations enregistrées
+            </span>
+          </div>
 
-    <div className="dashboard-kpi-showcase__hero">
-      <div>
-        <p className="dashboard-kpi-showcase__label">Réservations confirmées</p>
-        <h2>{confirmedCount}</h2>
-        <span className="dashboard-kpi-showcase__sub">
-          {bookingValidationRate}% du total des réservations
-        </span>
-      </div>
+          <div className="dashboard-kpi-showcase__hero">
+            <div>
+              <p className="dashboard-kpi-showcase__label">Réservations confirmées</p>
+              <h2>{confirmedCount}</h2>
+              <span className="dashboard-kpi-showcase__sub">
+                {bookingValidationRate}% du total des réservations
+              </span>
+            </div>
 
-      <div className="dashboard-kpi-showcase__ring-wrap">
-        <div
-          className="dashboard-kpi-mini-ring"
-          style={
-            {
-              "--progress": `${bookingValidationRate}%`,
-            } as CSSProperties
-          }
-        >
-          <div className="dashboard-kpi-mini-ring__inner">
-            <strong>{bookingValidationRate}%</strong>
-            <span>validé</span>
+            <div className="dashboard-kpi-showcase__ring-wrap">
+              <div
+                className="dashboard-kpi-mini-ring"
+                style={
+                  {
+                    "--progress": `${bookingValidationRate}%`,
+                  } as CSSProperties
+                }
+              >
+                <div className="dashboard-kpi-mini-ring__inner">
+                  <strong>{bookingValidationRate}%</strong>
+                  <span>validé</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="dashboard-kpi-showcase__footer">
+            <div className="dashboard-kpi-foot-card">
+              <span>En attente</span>
+              <strong>{pendingCount}</strong>
+            </div>
+
+            <div className="dashboard-kpi-foot-card">
+              <span>Annulées</span>
+              <strong>{cancelledCount}</strong>
+            </div>
+
+            <div className="dashboard-kpi-foot-card">
+              <span>Actives aujourd’hui</span>
+              <strong>{activeReservationsToday}</strong>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <div className="dashboard-kpi-showcase__footer">
-      <div className="dashboard-kpi-foot-card">
-        <span>En attente</span>
-        <strong>{pendingCount}</strong>
-      </div>
+        <div className="dashboard-kpi-showcase__side">
+          <article className="dashboard-kpi-tile">
+            <span>Réservations totales</span>
+            <strong>{bookings.length}</strong>
+            <small>Toutes les demandes enregistrées</small>
+          </article>
 
-      <div className="dashboard-kpi-foot-card">
-        <span>Annulées</span>
-        <strong>{cancelledCount}</strong>
-      </div>
+          <article className="dashboard-kpi-tile">
+            <span>Voitures actives</span>
+            <strong>{activeVehiclesCount}</strong>
+            <small>Disponibles à la location</small>
+          </article>
 
-      <div className="dashboard-kpi-foot-card">
-        <span>Actives aujourd’hui</span>
-        <strong>{activeReservationsToday}</strong>
-      </div>
-    </div>
-  </div>
+          <article className="dashboard-kpi-tile">
+            <span>Voitures inactives</span>
+            <strong>{inactiveVehiclesCount}</strong>
+            <small>Indisponibles ou retirées</small>
+          </article>
 
-  <div className="dashboard-kpi-showcase__side">
-    <article className="dashboard-kpi-tile">
-      <span>Réservations totales</span>
-      <strong>{bookings.length}</strong>
-      <small>Toutes les demandes enregistrées</small>
-    </article>
-
-    <article className="dashboard-kpi-tile">
-      <span>Voitures actives</span>
-      <strong>{activeVehiclesCount}</strong>
-      <small>Disponibles à la location</small>
-    </article>
-
-    <article className="dashboard-kpi-tile">
-      <span>Voitures inactives</span>
-      <strong>{inactiveVehiclesCount}</strong>
-      <small>Indisponibles ou retirées</small>
-    </article>
-
-    <article className="dashboard-kpi-tile">
-      <span>Taux flotte dispo</span>
-      <strong>{fleetAvailabilityRate}%</strong>
-      <small>{totalVehiclesCount} véhicules au total</small>
-    </article>
-  </div>
-</section>
+          <article className="dashboard-kpi-tile">
+            <span>Taux flotte dispo</span>
+            <strong>{fleetAvailabilityRate}%</strong>
+            <small>{totalVehiclesCount} véhicules au total</small>
+          </article>
+        </div>
+      </section>
 
       <section className="dashboard-premium-grid">
         <div className="dashboard-main-stack">
@@ -826,6 +860,87 @@ export default function DashboardPage() {
                       )}`}
                     >
                       {getPaymentLabel(booking)}
+                    </span>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section className="dashboard-panel-premium dashboard-panel-premium--side">
+            <div className="dashboard-panel-premium__head">
+              <div>
+                <span className="panel-mini-kicker">Flotte</span>
+                <h2>Aperçu véhicules</h2>
+              </div>
+            </div>
+
+            <div className="recent-bookings-list">
+              {recentVehicles.length === 0 && (
+                <div className="dashboard-empty-premium">
+                  Aucun véhicule trouvé.
+                </div>
+              )}
+
+              {recentVehicles.map((vehicle) => (
+                <article key={vehicle.id} className="recent-booking-card">
+                  <div className="recent-booking-card__top">
+                    <div>
+                      <h4>{getVehicleName(vehicle)}</h4>
+                      <p>{vehicle.category?.name || "Sans catégorie"}</p>
+                    </div>
+
+                    <span
+                      className={`recent-status-chip ${
+                        vehicle.available
+                          ? "recent-status-chip--confirmed"
+                          : "recent-status-chip--cancelled"
+                      }`}
+                    >
+                      {vehicle.available ? "Disponible" : "Indisponible"}
+                    </span>
+                  </div>
+
+                  {vehicle.image && (
+                    <div
+                      style={{
+                        width: "100%",
+                        height: 120,
+                        borderRadius: 16,
+                        overflow: "hidden",
+                        marginTop: 10,
+                        marginBottom: 10,
+                        background: "#f4f7fb",
+                        border: "1px solid rgba(6,42,75,0.08)",
+                      }}
+                    >
+                      <img
+                        src={vehicle.image}
+                        alt={getVehicleName(vehicle)}
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "cover",
+                          display: "block",
+                        }}
+                      />
+                    </div>
+                  )}
+
+                  <div className="recent-booking-card__meta">
+                    <span>{vehicle.slug || "Slug non renseigné"}</span>
+                    <span>{formatPrice(Number(vehicle.basePriceDay || 0))} / jour</span>
+                  </div>
+
+                  <div className="recent-booking-card__meta">
+                    <span>{vehicle.gearbox || "Boîte non renseignée"}</span>
+                    <span>{vehicle.fuel || "Carburant non renseigné"}</span>
+                  </div>
+
+                  <div className="recent-booking-card__bottom">
+                    <strong>{vehicle.seats ?? 0} places</strong>
+                    <span className="recent-payment-chip recent-payment-chip--deposit">
+                      {vehicle.bags ?? 0} bagages
                     </span>
                   </div>
                 </article>

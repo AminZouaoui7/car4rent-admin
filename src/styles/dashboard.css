@@ -1,11 +1,11 @@
 .dashboard-premium-page {
   width: 100%;
   max-width: 1540px;
-  margin: 14px auto 22px;
-  padding: 16px;
+  margin: 10px auto 16px;
+  padding: 12px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
   color: #0f172a;
   box-sizing: border-box;
 }
@@ -15,8 +15,8 @@
   overflow: hidden;
   display: grid;
   grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.9fr);
-  gap: 18px;
-  padding: 28px;
+  gap: 12px;
+  padding: 18px;
   border-radius: 30px;
   background:
     radial-gradient(circle at top right, rgba(126, 202, 255, 0.24), transparent 28%),

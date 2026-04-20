@@ -19,8 +19,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 18px;
-  padding: 20px 22px;
+  gap: 12px;
+  padding: 14px 16px;
   border-radius: 24px;
   background: linear-gradient(135deg, #083660 0%, #0a4b82 58%, #2e7ab3 100%);
   color: #ffffff;

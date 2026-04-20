@@ -17,7 +17,7 @@
 }
 
 html {
-  font-size: 12px;
+  font-size: 11px;
 }
 
 html,
@@ -123,7 +123,7 @@ textarea {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 18px 14px;
+  padding: 12px 10px;
   background: linear-gradient(180deg, #062a4b 0%, #073457 48%, #094371 100%);
   color: white;
   box-shadow: 10px 0 28px rgba(6, 42, 75, 0.18);
@@ -360,14 +360,14 @@ textarea {
 
 .admin-content {
   flex: 1;
-  padding: 22px;
+  padding: 16px;
 }
 
 .admin-content-inner {
   width: 100%;
   max-width: none;
   margin: 0;
-  padding: 18px 22px;
+  padding: 12px 16px;
 }
 
 /* ========================================
@@ -377,7 +377,7 @@ textarea {
 .dashboard-page {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 12px;
 }
 
 .dashboard-hero {
@@ -386,8 +386,8 @@ textarea {
   display: flex;
   align-items: stretch;
   justify-content: space-between;
-  gap: 18px;
-  padding: 22px;
+  gap: 12px;
+  padding: 16px;
   border-radius: 22px;
   background: linear-gradient(135deg, #062a4b 0%, #094371 65%, #1c6aa8 100%);
   color: white;
@@ -493,7 +493,7 @@ textarea {
   backdrop-filter: blur(8px);
   border: 1px solid rgba(221, 232, 243, 0.95);
   border-radius: 20px;
-  padding: 18px;
+  padding: 14px;
   box-shadow: var(--shadow);
   transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.18s ease;
 }
@@ -525,13 +525,13 @@ textarea {
 .dashboard-stat-label {
   display: block;
   margin-bottom: 10px;
-  font-size: 12px;
+  font-size: 11px;
   color: #6f8599;
 }
 
 .stat-card-value,
 .dashboard-stat-card strong {
-  font-size: 28px;
+  font-size: 24px;
   line-height: 1;
   font-weight: 800;
   color: var(--navy);
@@ -540,14 +540,14 @@ textarea {
 }
 
 .stat-card-subtext {
-  font-size: 11px;
+  font-size: 10px;
   color: #7f93a5;
 }
 
 .dashboard-grid {
   display: grid;
   grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr);
-  gap: 16px;
+  gap: 12px;
 }
 
 .dashboard-panel {
@@ -555,7 +555,7 @@ textarea {
   backdrop-filter: blur(8px);
   border: 1px solid rgba(221, 232, 243, 0.95);
   border-radius: 20px;
-  padding: 18px;
+  padding: 14px;
   box-shadow: var(--shadow);
 }
 

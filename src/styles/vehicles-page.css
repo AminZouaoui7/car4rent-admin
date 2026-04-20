@@ -1,7 +1,7 @@
 .vehicles-admin-page {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 12px;
   color: #102a43;
 }
 
@@ -14,8 +14,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 18px;
-  padding: 22px;
+  gap: 12px;
+  padding: 16px;
   border-radius: 22px;
   background: linear-gradient(135deg, #062a4b 0%, #094371 70%, #2b7fc0 100%);
   color: white;

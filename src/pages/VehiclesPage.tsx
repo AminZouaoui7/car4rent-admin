@@ -24,7 +24,7 @@ type Vehicle = {
   bags: number;
   available: boolean;
   image?: string | null;
-  categoryId: string;
+  categoryId?: string;
   category?: Category | null;
   createdAt?: string;
   updatedAt?: string;
@@ -80,41 +80,14 @@ export default function VehiclesPage() {
 
   const [editingVehicle, setEditingVehicle] = useState<Vehicle | null>(null);
   const [selectedVehicle, setSelectedVehicle] = useState<Vehicle | null>(null);
+  const [vehicleToDelete, setVehicleToDelete] = useState<Vehicle | null>(null);
+
   const [form, setForm] = useState<VehicleFormData>(emptyForm);
 
- useEffect(() => {
-  loadInitialData();
-}, []);
+  useEffect(() => {
+    void loadInitialData();
+  }, []);
 
-async function loadInitialData() {
-  await Promise.all([loadVehicles(), loadCategories()]);
-}
-async function loadCategories() {
-  const token = getAdminToken();
-
-  if (!token) {
-    setPageError("Token admin introuvable. Reconnecte-toi.");
-    return;
-  }
-
-  try {
-    const res = await fetch(`${API_BASE_URL}/categories`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    const data = await res.json().catch(() => []);
-
-    if (!res.ok) {
-      throw new Error(data?.message || "Impossible de charger les catégories.");
-    }
-
-    setCategories(Array.isArray(data) ? data : []);
-  } catch (error: any) {
-    setPageError(error?.message || "Impossible de charger les catégories.");
-  }
-}
   useEffect(() => {
     if (!successMessage) return;
     const timer = setTimeout(() => setSuccessMessage(""), 2500);
@@ -129,6 +102,37 @@ async function loadCategories() {
     };
   }, [imagePreview]);
 
+  async function loadInitialData() {
+    await Promise.all([loadVehicles(), loadCategories()]);
+  }
+
+  async function loadCategories() {
+    const token = getAdminToken();
+
+    if (!token) {
+      setPageError("Token admin introuvable. Reconnecte-toi.");
+      return;
+    }
+
+    try {
+      const res = await fetch(`${API_BASE_URL}/categories`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const data = await res.json().catch(() => []);
+
+      if (!res.ok) {
+        throw new Error(data?.message || "Impossible de charger les catégories.");
+      }
+
+      setCategories(Array.isArray(data) ? data : []);
+    } catch (error: any) {
+      setPageError(error?.message || "Impossible de charger les catégories.");
+    }
+  }
+
   async function loadVehicles() {
     setLoading(true);
     setPageError("");
@@ -142,7 +146,7 @@ async function loadCategories() {
     }
 
     try {
-      const res = await fetch(`${API_BASE_URL}/vehicles`, {
+      const res = await fetch(`${API_BASE_URL}/vehicles/admin/all`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -154,16 +158,20 @@ async function loadCategories() {
         throw new Error(data?.message || "Impossible de charger les véhicules.");
       }
 
-      setVehicles(Array.isArray(data) ? data : []);
+      const normalizedVehicles: Vehicle[] = Array.isArray(data)
+        ? data.map((vehicle: any) => ({
+            ...vehicle,
+            categoryId: vehicle.categoryId || vehicle.category?.id || "",
+          }))
+        : [];
+
+      setVehicles(normalizedVehicles);
     } catch (error: any) {
       setPageError(error?.message || "Une erreur est survenue.");
     } finally {
       setLoading(false);
     }
   }
-
-  
-
 
   const filteredVehicles = useMemo(() => {
     const keyword = search.trim().toLowerCase();
@@ -411,7 +419,7 @@ async function loadCategories() {
         throw new Error(data?.message || "Enregistrement impossible.");
       }
 
-await loadInitialData();
+      await loadInitialData();
       setIsFormOpen(false);
       setEditingVehicle(null);
       setForm(emptyForm);
@@ -424,8 +432,6 @@ await loadInitialData();
       setUploadingImage(false);
     }
   }
-
-  const [vehicleToDelete, setVehicleToDelete] = useState<Vehicle | null>(null);
 
   async function confirmDeleteVehicle() {
     if (!vehicleToDelete) return;
@@ -454,8 +460,11 @@ await loadInitialData();
         throw new Error(data?.message || "Suppression impossible.");
       }
 
-      setVehicles((prev) => prev.filter((v) => v.id !== vehicleToDelete.id));
-      setSuccessMessage("Véhicule supprimé avec succès.");
+      await loadVehicles();
+
+      setSuccessMessage(
+        data?.message || "Véhicule supprimé avec succès."
+      );
     } catch (error: any) {
       setActionError(error?.message || "Une erreur est survenue.");
     } finally {
@@ -492,16 +501,12 @@ await loadInitialData();
         throw new Error(data?.message || "Changement de disponibilité impossible.");
       }
 
-      setVehicles((prev) =>
-        prev.map((v) =>
-          v.id === vehicle.id ? { ...v, available: !vehicle.available } : v
-        )
-      );
+      await loadVehicles();
 
       setSuccessMessage(
         !vehicle.available
-          ? "Véhicule marqué comme disponible."
-          : "Véhicule marqué comme indisponible."
+          ? "Véhicule marqué comme indisponible."
+          : "Véhicule marqué comme disponible."
       );
     } catch (error: any) {
       setActionError(error?.message || "Une erreur est survenue.");
@@ -518,7 +523,12 @@ await loadInitialData();
         </div>
 
         <div className="bookings-header-right">
-          <button className="btn-neutral" onClick={openCreateModal} type="button" style={{ height: 44, padding: '0 20px' }}>
+          <button
+            className="btn-neutral"
+            onClick={openCreateModal}
+            type="button"
+            style={{ height: 44, padding: "0 20px" }}
+          >
             + Ajouter un véhicule
           </button>
         </div>
@@ -563,7 +573,10 @@ await loadInitialData();
             ))}
           </select>
 
-          <select value={availabilityFilter} onChange={(e) => setAvailabilityFilter(e.target.value)}>
+          <select
+            value={availabilityFilter}
+            onChange={(e) => setAvailabilityFilter(e.target.value)}
+          >
             <option value="all">Toutes disponibilités</option>
             <option value="available">Disponibles</option>
             <option value="unavailable">Indisponibles</option>
@@ -572,7 +585,6 @@ await loadInitialData();
       </section>
 
       {successMessage && <Alert kind="success">{successMessage}</Alert>}
-
       {(pageError || actionError) && <Alert kind="error">{pageError || actionError}</Alert>}
 
       <section className="vehicles-admin-table-card">
@@ -658,7 +670,7 @@ await loadInitialData();
 
                         <button
                           className="vehicle-action-btn vehicle-action-btn--toggle"
-                          onClick={() => handleToggleAvailability(vehicle)}
+                          onClick={() => void handleToggleAvailability(vehicle)}
                           type="button"
                         >
                           {vehicle.available ? "Désactiver" : "Activer"}
@@ -811,10 +823,7 @@ await loadInitialData();
 
                   {(imagePreview || form.image) && (
                     <div className="vehicle-upload-preview">
-                      <img
-                        src={imagePreview || form.image}
-                        alt="Prévisualisation véhicule"
-                      />
+                      <img src={imagePreview || form.image} alt="Prévisualisation véhicule" />
                     </div>
                   )}
                 </div>
