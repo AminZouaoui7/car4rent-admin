@@ -17,7 +17,7 @@
 }
 
 html {
-  font-size: 13px;
+  font-size: 12px;
 }
 
 html,
@@ -175,7 +175,7 @@ textarea {
 
 .admin-brand-text h2 {
   margin: 0;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 800;
   letter-spacing: 0.2px;
 }
@@ -183,7 +183,7 @@ textarea {
 .admin-brand-text span {
   display: block;
   margin-top: 4px;
-  font-size: 11px;
+  font-size: 10px;
   color: rgba(255, 255, 255, 0.76);
 }
 
@@ -201,7 +201,7 @@ textarea {
   padding: 12px 14px;
   border-radius: 14px;
   color: #ecf5ff;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
   border: 1px solid transparent;
   transition: transform 0.24s ease, background 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
@@ -224,7 +224,7 @@ textarea {
   width: 18px;
   display: inline-flex;
   justify-content: center;
-  font-size: 12px;
+  font-size: 11px;
   opacity: 0.9;
 }
 
@@ -249,7 +249,7 @@ textarea {
   background: white;
   color: var(--navy);
   font-weight: 800;
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .admin-user-text {
@@ -258,11 +258,11 @@ textarea {
 }
 
 .admin-user-text strong {
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .admin-user-text span {
-  font-size: 10px;
+  font-size: 9px;
   color: rgba(255, 255, 255, 0.72);
 }
 
@@ -274,7 +274,7 @@ textarea {
   background: white;
   color: var(--navy);
   font-weight: 700;
-  font-size: 13px;
+  font-size: 12px;
   cursor: pointer;
   box-shadow: 0 10px 18px rgba(0, 0, 0, 0.12);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -316,7 +316,7 @@ textarea {
 }
 
 .admin-navbar-kicker {
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 800;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -325,14 +325,14 @@ textarea {
 
 .admin-navbar h1 {
   margin: 0;
-  font-size: 16px;
+  font-size: 15px;
   color: var(--navy);
   line-height: 1.08;
 }
 
 .admin-navbar p {
   margin: 0;
-  font-size: 12px;
+  font-size: 11px;
   color: #6e8398;
 }
 
@@ -346,7 +346,7 @@ textarea {
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
   color: var(--navy);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
 }
 

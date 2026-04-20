@@ -65,7 +65,7 @@
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.14);
   border: 1px solid rgba(255, 255, 255, 0.16);
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 900;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -73,7 +73,7 @@
 
 .dashboard-premium-hero__content h1 {
   margin: 14px 0 10px;
-  font-size: 38px;
+  font-size: 34px;
   line-height: 1.03;
   font-weight: 900;
   letter-spacing: -0.03em;
@@ -83,7 +83,7 @@
   margin: 0;
   max-width: 760px;
   color: rgba(255, 255, 255, 0.92);
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.7;
 }
 
@@ -107,7 +107,7 @@
   border-radius: 14px;
   background: #ffffff;
   color: #083660;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 900;
   box-shadow: 0 10px 24px rgba(255, 255, 255, 0.18);
 }
@@ -131,7 +131,7 @@
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
 }
 
@@ -173,7 +173,7 @@
 
 .hero-glass-card span {
   display: block;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 800;
   color: rgba(255, 255, 255, 0.9);
 }
@@ -181,7 +181,7 @@
 .hero-glass-card strong {
   display: block;
   margin-top: 8px;
-  font-size: 38px;
+  font-size: 34px;
   line-height: 1;
   font-weight: 900;
 }
@@ -189,7 +189,7 @@
 .hero-glass-card small {
   display: block;
   margin-top: 8px;
-  font-size: 12px;
+  font-size: 11px;
   color: rgba(255, 255, 255, 0.78);
 }
 
