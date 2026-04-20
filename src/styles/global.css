@@ -17,7 +17,7 @@
 }
 
 html {
-  font-size: 11px;
+  font-size: 10px;
 }
 
 html,
@@ -27,6 +27,7 @@ body,
   font-family: Inter, Arial, Helvetica, sans-serif;
   background: #f6fbff;
   color: var(--text);
+  line-height: 1.4;
 }
 
 body {
@@ -115,7 +116,7 @@ textarea {
 }
 
 .admin-sidebar {
-  width: 255px;
+  width: 220px;
   min-height: 100vh;
   position: sticky;
   top: 0;
@@ -123,7 +124,7 @@ textarea {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 12px 10px;
+  padding: 10px 8px;
   background: linear-gradient(180deg, #062a4b 0%, #073457 48%, #094371 100%);
   color: white;
   box-shadow: 10px 0 28px rgba(6, 42, 75, 0.18);
@@ -149,15 +150,15 @@ textarea {
 .admin-brand {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 8px 6px 18px;
+  gap: 10px;
+  padding: 6px 4px 14px;
   animation: fadeSlideIn 0.65s ease;
 }
 
 .admin-brand-logo-wrap {
-  width: 56px;
-  height: 56px;
-  border-radius: 16px;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -167,41 +168,41 @@ textarea {
 }
 
 .admin-brand-logo {
-  width: 38px;
-  height: 38px;
+  width: 30px;
+  height: 30px;
   object-fit: contain;
   filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.2));
 }
 
 .admin-brand-text h2 {
   margin: 0;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 800;
   letter-spacing: 0.2px;
 }
 
 .admin-brand-text span {
   display: block;
-  margin-top: 4px;
-  font-size: 10px;
+  margin-top: 2px;
+  font-size: 9px;
   color: rgba(255, 255, 255, 0.76);
 }
 
 .admin-menu {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-top: 14px;
+  gap: 8px;
+  margin-top: 10px;
 }
 
 .admin-menu-link {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 12px 14px;
-  border-radius: 14px;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 12px;
   color: #ecf5ff;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   border: 1px solid transparent;
   transition: transform 0.24s ease, background 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
@@ -221,27 +222,27 @@ textarea {
 }
 
 .menu-icon {
-  width: 18px;
+  width: 16px;
   display: inline-flex;
   justify-content: center;
-  font-size: 11px;
+  font-size: 10px;
   opacity: 0.9;
 }
 
 .admin-user-box {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 12px;
-  padding: 12px;
-  border-radius: 16px;
+  gap: 8px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 14px;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.09);
 }
 
 .admin-user-avatar {
-  width: 38px;
-  height: 38px;
+  width: 32px;
+  height: 32px;
   border-radius: 999px;
   display: flex;
   align-items: center;
@@ -249,7 +250,7 @@ textarea {
   background: white;
   color: var(--navy);
   font-weight: 800;
-  font-size: 11px;
+  font-size: 10px;
 }
 
 .admin-user-text {
@@ -258,23 +259,23 @@ textarea {
 }
 
 .admin-user-text strong {
-  font-size: 11px;
+  font-size: 10px;
 }
 
 .admin-user-text span {
-  font-size: 9px;
+  font-size: 8px;
   color: rgba(255, 255, 255, 0.72);
 }
 
 .logout-btn {
   width: 100%;
   border: none;
-  border-radius: 14px;
-  padding: 12px 14px;
+  border-radius: 12px;
+  padding: 10px 12px;
   background: white;
   color: var(--navy);
   font-weight: 700;
-  font-size: 12px;
+  font-size: 11px;
   cursor: pointer;
   box-shadow: 0 10px 18px rgba(0, 0, 0, 0.12);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -295,8 +296,8 @@ textarea {
 }
 
 .admin-navbar {
-  min-height: 78px;
-  padding: 16px 24px;
+  min-height: 60px;
+  padding: 12px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -311,12 +312,12 @@ textarea {
 .admin-navbar-left {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 2px;
   animation: fadeSlideIn 0.7s ease;
 }
 
 .admin-navbar-kicker {
-  font-size: 9px;
+  font-size: 8px;
   font-weight: 800;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -325,28 +326,28 @@ textarea {
 
 .admin-navbar h1 {
   margin: 0;
-  font-size: 15px;
+  font-size: 14px;
   color: var(--navy);
   line-height: 1.08;
 }
 
 .admin-navbar p {
   margin: 0;
-  font-size: 11px;
+  font-size: 10px;
   color: #6e8398;
 }
 
 .admin-date-chip {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 14px;
+  gap: 6px;
+  padding: 8px 12px;
   border-radius: 999px;
   background: white;
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
   color: var(--navy);
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
 }
 
@@ -360,14 +361,14 @@ textarea {
 
 .admin-content {
   flex: 1;
-  padding: 16px;
+  padding: 10px;
 }
 
 .admin-content-inner {
   width: 100%;
   max-width: none;
   margin: 0;
-  padding: 12px 16px;
+  padding: 8px 12px;
 }
 
 /* ========================================
@@ -386,9 +387,9 @@ textarea {
   display: flex;
   align-items: stretch;
   justify-content: space-between;
-  gap: 12px;
-  padding: 16px;
-  border-radius: 22px;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 18px;
   background: linear-gradient(135deg, #062a4b 0%, #094371 65%, #1c6aa8 100%);
   color: white;
   box-shadow: var(--shadow-strong);
@@ -399,8 +400,8 @@ textarea {
   position: absolute;
   top: -60px;
   right: -40px;
-  width: 180px;
-  height: 180px;
+  width: 150px;
+  height: 150px;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.08);
 }
@@ -410,8 +411,8 @@ textarea {
   position: absolute;
   bottom: -80px;
   left: 35%;
-  width: 220px;
-  height: 220px;
+  width: 180px;
+  height: 180px;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.05);
 }
@@ -424,8 +425,8 @@ textarea {
 
 .dashboard-hero-content span {
   display: inline-block;
-  margin-bottom: 8px;
-  font-size: 10px;
+  margin-bottom: 6px;
+  font-size: 9px;
   font-weight: 800;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -433,28 +434,28 @@ textarea {
 }
 
 .dashboard-hero-content h2 {
-  margin: 0 0 10px;
-  font-size: 24px;
+  margin: 0 0 8px;
+  font-size: 20px;
   line-height: 1.08;
 }
 
 .dashboard-hero-content p {
   margin: 0;
   max-width: 720px;
-  font-size: 12px;
+  font-size: 11px;
   color: rgba(255, 255, 255, 0.86);
 }
 
 .dashboard-hero-glass {
-  min-width: 150px;
+  min-width: 130px;
   display: flex;
   align-items: center;
 }
 
 .hero-metric {
   width: 100%;
-  padding: 18px 16px;
-  border-radius: 18px;
+  padding: 12px 14px;
+  border-radius: 14px;
   background: rgba(255, 255, 255, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.14);
   backdrop-filter: blur(8px);
@@ -463,20 +464,20 @@ textarea {
 
 .hero-metric strong {
   display: block;
-  font-size: 30px;
+  font-size: 24px;
   line-height: 1;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .hero-metric span {
-  font-size: 12px;
+  font-size: 11px;
   color: rgba(255, 255, 255, 0.82);
 }
 
 .dashboard-stats {
   display: grid;
   grid-template-columns: repeat(3, minmax(180px, 1fr));
-  gap: 16px;
+  gap: 12px;
 }
 
 .dashboard-stats-grid {
@@ -555,62 +556,62 @@ textarea {
   backdrop-filter: blur(8px);
   border: 1px solid rgba(221, 232, 243, 0.95);
   border-radius: 20px;
-  padding: 14px;
+  padding: 12px;
   box-shadow: var(--shadow);
 }
 
 .dashboard-panel h3 {
-  margin: 0 0 14px;
-  font-size: 16px;
+  margin: 0 0 10px;
+  font-size: 14px;
   color: var(--navy);
 }
 
 .dashboard-panel-small {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 .quick-info-card {
-  padding: 14px;
-  border-radius: 16px;
+  padding: 10px;
+  border-radius: 14px;
   background: #f7fbff;
   border: 1px solid #e3edf6;
 }
 
 .quick-info-label {
   display: block;
-  font-size: 11px;
+  font-size: 10px;
   color: #70859a;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .quick-info-value {
   display: block;
-  font-size: 18px;
+  font-size: 15px;
   color: var(--navy);
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .quick-info-card p {
   margin: 0;
-  font-size: 11px;
+  font-size: 10px;
   color: #7c90a2;
 }
 
 .dashboard-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .dashboard-list-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 14px;
-  padding: 14px;
-  border-radius: 16px;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 14px;
   background: linear-gradient(180deg, #fbfdff 0%, #f6fbff 100%);
   border: 1px solid #e4edf5;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -624,17 +625,17 @@ textarea {
 .dashboard-list-left {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
 }
 
 .dashboard-list-title {
   font-weight: 700;
   color: var(--text);
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .dashboard-list-subtitle {
-  font-size: 11px;
+  font-size: 10px;
   color: #76899c;
 }
 
@@ -690,8 +691,8 @@ textarea {
 .bookings-hero {
   position: relative;
   overflow: hidden;
-  padding: 22px;
-  border-radius: 22px;
+  padding: 14px;
+  border-radius: 18px;
   background: linear-gradient(135deg, #062a4b 0%, #094371 70%, #2b7fc0 100%);
   color: white;
   box-shadow: 0 18px 34px rgba(9, 45, 77, 0.14);
@@ -700,8 +701,8 @@ textarea {
 .bookings-hero::before {
   content: "";
   position: absolute;
-  width: 180px;
-  height: 180px;
+  width: 150px;
+  height: 150px;
   border-radius: 999px;
   top: -60px;
   right: -30px;
@@ -712,13 +713,13 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
+  gap: 14px;
 }
 
 .bookings-hero-badge {
-  min-width: 130px;
-  padding: 18px 20px;
-  border-radius: 20px;
+  min-width: 110px;
+  padding: 12px 14px;
+  border-radius: 16px;
   background: rgba(255, 255, 255, 0.14);
   color: #fff;
   text-align: center;
@@ -727,20 +728,20 @@ textarea {
 
 .bookings-hero-badge strong {
   display: block;
-  font-size: 28px;
+  font-size: 22px;
   line-height: 1;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .bookings-hero-badge span {
-  font-size: 13px;
+  font-size: 11px;
   opacity: 0.95;
 }
 
 .bookings-kicker {
   display: inline-block;
-  margin-bottom: 8px;
-  font-size: 10px;
+  margin-bottom: 6px;
+  font-size: 9px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -748,30 +749,30 @@ textarea {
 }
 
 .bookings-hero h2 {
-  margin: 0 0 8px;
-  font-size: 24px;
+  margin: 0 0 6px;
+  font-size: 20px;
 }
 
 .bookings-hero p {
   margin: 0;
   max-width: 760px;
   color: rgba(255, 255, 255, 0.88);
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .bookings-stats,
 .bookings-stats--modern {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 18px;
+  gap: 12px;
 }
 
 .bookings-toolbar {
   display: grid;
   grid-template-columns: minmax(0, 2fr) minmax(220px, 320px);
-  gap: 16px;
-  padding: 18px;
-  border-radius: 18px;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 14px;
   background: rgba(255, 255, 255, 0.86);
   border: 1px solid rgba(221, 232, 243, 0.95);
   box-shadow: 0 14px 24px rgba(15, 39, 64, 0.05);

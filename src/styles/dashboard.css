@@ -72,8 +72,8 @@
 }
 
 .dashboard-premium-hero__content h1 {
-  margin: 14px 0 10px;
-  font-size: 34px;
+  margin: 10px 0 8px;
+  font-size: 26px;
   line-height: 1.03;
   font-weight: 900;
   letter-spacing: -0.03em;
@@ -83,16 +83,16 @@
   margin: 0;
   max-width: 760px;
   color: rgba(255, 255, 255, 0.92);
-  font-size: 13px;
+  font-size: 11px;
   line-height: 1.7;
 }
 
 .dashboard-premium-hero__actions {
-  margin-top: 22px;
+  margin-top: 16px;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 10px;
 }
 
 .dashboard-btn {
@@ -102,12 +102,12 @@
 }
 
 .dashboard-btn--primary {
-  min-height: 46px;
-  padding: 0 18px;
-  border-radius: 14px;
+  min-height: 38px;
+  padding: 0 14px;
+  border-radius: 12px;
   background: #ffffff;
   color: #083660;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 900;
   box-shadow: 0 10px 24px rgba(255, 255, 255, 0.18);
 }
@@ -125,39 +125,39 @@
 .dashboard-inline-note {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  min-height: 42px;
-  padding: 0 14px;
+  gap: 6px;
+  min-height: 34px;
+  padding: 0 12px;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
 }
 
 .dashboard-inline-dot {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
   border-radius: 999px;
   background: #89f0b5;
-  box-shadow: 0 0 0 5px rgba(137, 240, 181, 0.14);
+  box-shadow: 0 0 0 4px rgba(137, 240, 181, 0.14);
 }
 
 .dashboard-premium-hero__side {
   display: grid;
-  gap: 14px;
+  gap: 10px;
   align-content: center;
 }
 
 .hero-glass-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
+  gap: 10px;
 }
 
 .hero-glass-card {
-  padding: 18px;
-  border-radius: 22px;
+  padding: 12px;
+  border-radius: 18px;
   background: rgba(255, 255, 255, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.14);
   backdrop-filter: blur(8px);
@@ -165,7 +165,7 @@
 }
 
 .hero-glass-card--main {
-  min-height: 140px;
+  min-height: 110px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -173,23 +173,23 @@
 
 .hero-glass-card span {
   display: block;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 800;
   color: rgba(255, 255, 255, 0.9);
 }
 
 .hero-glass-card strong {
   display: block;
-  margin-top: 8px;
-  font-size: 34px;
+  margin-top: 6px;
+  font-size: 26px;
   line-height: 1;
   font-weight: 900;
 }
 
 .hero-glass-card small {
   display: block;
-  margin-top: 8px;
-  font-size: 11px;
+  margin-top: 6px;
+  font-size: 10px;
   color: rgba(255, 255, 255, 0.78);
 }
 
@@ -206,12 +206,12 @@
 .premium-stat-card {
   position: relative;
   overflow: hidden;
-  min-height: 126px;
-  padding: 18px;
-  border-radius: 24px;
+  min-height: 100px;
+  padding: 12px;
+  border-radius: 20px;
   display: flex;
   align-items: flex-start;
-  gap: 14px;
+  gap: 10px;
   color: #fff;
   box-shadow: 0 14px 35px rgba(15, 23, 42, 0.08);
 }
@@ -221,8 +221,8 @@
   position: absolute;
   right: -12px;
   bottom: -16px;
-  width: 96px;
-  height: 96px;
+  width: 70px;
+  height: 70px;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.1);
 }
@@ -234,36 +234,36 @@
 }
 
 .premium-stat-card__icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 16px;
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
   display: grid;
   place-items: center;
   background: rgba(255, 255, 255, 0.14);
-  font-size: 20px;
+  font-size: 16px;
   flex-shrink: 0;
 }
 
 .premium-stat-card__body {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
 }
 
 .premium-stat-card__body span {
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 800;
   color: rgba(255, 255, 255, 0.88);
 }
 
 .premium-stat-card__body strong {
-  font-size: 30px;
+  font-size: 22px;
   line-height: 1;
   font-weight: 900;
 }
 
 .premium-stat-card__body small {
-  font-size: 12px;
+  font-size: 10px;
   color: rgba(255, 255, 255, 0.76);
 }
 
@@ -294,75 +294,75 @@
 .dashboard-premium-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.8fr);
-  gap: 16px;
+  gap: 12px;
   align-items: start;
 }
 
 .dashboard-main-stack,
 .dashboard-side-stack-premium {
   display: grid;
-  gap: 16px;
+  gap: 12px;
 }
 
 .dashboard-panel-premium {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(247, 250, 253, 0.98) 100%);
   border: 1px solid #dbe7f3;
-  border-radius: 28px;
-  padding: 20px;
+  border-radius: 24px;
+  padding: 14px;
   box-shadow: 0 18px 42px rgba(15, 23, 42, 0.05);
 }
 
 .dashboard-panel-premium--side {
-  padding: 18px;
+  padding: 12px;
 }
 
 .dashboard-panel-premium__head {
   display: flex;
   justify-content: space-between;
-  gap: 16px;
+  gap: 12px;
   align-items: flex-start;
-  margin-bottom: 18px;
+  margin-bottom: 12px;
 }
 
 .panel-mini-kicker {
   display: inline-flex;
   width: fit-content;
-  min-height: 28px;
+  min-height: 24px;
   align-items: center;
-  padding: 0 12px;
+  padding: 0 10px;
   border-radius: 999px;
   background: #edf5fc;
   color: #1b4d77;
   border: 1px solid #d8e8f7;
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 900;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
 .dashboard-panel-premium__head h2 {
-  margin: 10px 0 6px;
-  font-size: 24px;
+  margin: 6px 0 4px;
+  font-size: 18px;
   line-height: 1.1;
   color: #0f172a;
 }
 
 .dashboard-panel-premium__head p {
   margin: 0;
-  font-size: 13px;
+  font-size: 11px;
   color: #64748b;
 }
 
 .dashboard-panel-premium__actions select {
-  height: 42px;
-  min-width: 180px;
-  padding: 0 14px;
-  border-radius: 12px;
+  height: 36px;
+  min-width: 150px;
+  padding: 0 12px;
+  border-radius: 10px;
   border: 1px solid #d3e0ec;
   background: #f8fbfe;
   outline: none;
   color: #0f172a;
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 700;
 }
 
@@ -374,25 +374,25 @@
 
 .payment-premium-layout {
   display: grid;
-  grid-template-columns: minmax(240px, 300px) minmax(0, 1fr);
-  gap: 18px;
+  grid-template-columns: minmax(180px, 240px) minmax(0, 1fr);
+  gap: 14px;
   align-items: center;
 }
 
 .payment-ring-card {
   display: grid;
-  gap: 14px;
+  gap: 10px;
   justify-items: center;
-  padding: 18px;
-  border-radius: 24px;
+  padding: 14px;
+  border-radius: 20px;
   background: linear-gradient(180deg, #f6fafe 0%, #eef6fd 100%);
   border: 1px solid #dce9f6;
 }
 
 .payment-ring-premium {
   --progress: 0%;
-  width: 190px;
-  height: 190px;
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
   background:
     conic-gradient(#0b5cab 0 var(--progress), #dbe9f6 var(--progress) 100%);
@@ -402,8 +402,8 @@
 }
 
 .payment-ring-premium__inner {
-  width: 138px;
-  height: 138px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   background: #ffffff;
   display: grid;
@@ -414,7 +414,7 @@
 
 .payment-ring-premium__inner strong {
   display: block;
-  font-size: 28px;
+  font-size: 20px;
   line-height: 1;
   color: #0b3458;
   font-weight: 900;
@@ -422,8 +422,8 @@
 
 .payment-ring-premium__inner span {
   display: block;
-  margin-top: 6px;
-  font-size: 12px;
+  margin-top: 4px;
+  font-size: 10px;
   color: #64748b;
   font-weight: 700;
 }
@@ -434,33 +434,33 @@
 
 .payment-ring-legend h3 {
   margin: 0;
-  font-size: 28px;
+  font-size: 20px;
   color: #0f172a;
 }
 
 .payment-ring-legend p {
-  margin: 6px 0 0;
-  font-size: 12px;
+  margin: 4px 0 0;
+  font-size: 10px;
   color: #64748b;
 }
 
 .payment-cards-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
+  gap: 10px;
 }
 
 .mini-payment-card {
-  min-height: 112px;
-  padding: 16px;
-  border-radius: 20px;
+  min-height: 90px;
+  padding: 12px;
+  border-radius: 16px;
   background: #ffffff;
   border: 1px solid #e1ebf5;
   box-shadow: 0 10px 24px rgba(15, 23, 42, 0.03);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .mini-payment-card--warning {
@@ -469,20 +469,20 @@
 }
 
 .mini-payment-card span {
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 800;
   color: #64748b;
 }
 
 .mini-payment-card strong {
-  font-size: 24px;
+  font-size: 18px;
   line-height: 1.05;
   color: #0f172a;
   font-weight: 900;
 }
 
 .mini-payment-card small {
-  font-size: 12px;
+  font-size: 10px;
   color: #7c8da1;
 }
 
