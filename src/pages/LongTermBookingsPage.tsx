@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ConfirmModal from "../components/ConfirmModal";
 import { adminFetch } from "../services/adminFetch";
 import "../styles/bookings-page.css";
 
@@ -204,6 +205,12 @@ export default function LongTermBookingsPage() {
   const [sortBy, setSortBy] = useState("priority");
   const [activeTab, setActiveTab] = useState<ViewTab>("pending");
   const [actionLoadingId, setActionLoadingId] = useState<string | null>(null);
+  const [confirmAction, setConfirmAction] = useState<null | {
+    title: string;
+    message: string;
+    confirmLabel: string;
+    action: () => void;
+  }>(null);
 
   useEffect(() => {
     loadBookings();
@@ -257,11 +264,6 @@ export default function LongTermBookingsPage() {
   }
 
   async function deleteRequest(id: string) {
-    const confirmed = window.confirm(
-      "Tu veux vraiment supprimer cette demande longue durée ?"
-    );
-    if (!confirmed) return;
-
     try {
       setActionLoadingId(id);
       setActionError("");
@@ -282,6 +284,15 @@ export default function LongTermBookingsPage() {
     } finally {
       setActionLoadingId(null);
     }
+  }
+
+  function openConfirm(action: {
+    title: string;
+    message: string;
+    confirmLabel: string;
+    action: () => void;
+  }) {
+    setConfirmAction(action);
   }
 
   const stats = useMemo(() => {
@@ -691,7 +702,14 @@ export default function LongTermBookingsPage() {
                       type="button"
                       className="btn-confirm"
                       disabled={actionLoadingId === booking.id}
-                      onClick={() => updateBookingStatus(booking.id, "Approved")}
+                      onClick={() =>
+                        openConfirm({
+                          title: "Approuver la demande",
+                          message: "Voulez-vous vraiment approuver cette demande ?",
+                          confirmLabel: "Oui, approuver",
+                          action: () => void updateBookingStatus(booking.id, "Approved"),
+                        })
+                      }
                     >
                       {actionLoadingId === booking.id ? "..." : "Approuver"}
                     </button>
@@ -702,7 +720,14 @@ export default function LongTermBookingsPage() {
                       type="button"
                       className="btn-cancel"
                       disabled={actionLoadingId === booking.id}
-                      onClick={() => updateBookingStatus(booking.id, "Rejected")}
+                      onClick={() =>
+                        openConfirm({
+                          title: "Refuser la demande",
+                          message: "Voulez-vous vraiment refuser cette demande ?",
+                          confirmLabel: "Oui, refuser",
+                          action: () => void updateBookingStatus(booking.id, "Rejected"),
+                        })
+                      }
                     >
                       {actionLoadingId === booking.id ? "..." : "Refuser"}
                     </button>
@@ -712,7 +737,14 @@ export default function LongTermBookingsPage() {
                     type="button"
                     className="btn-neutral"
                     disabled={actionLoadingId === booking.id}
-                    onClick={() => deleteRequest(booking.id)}
+                    onClick={() =>
+                      openConfirm({
+                        title: "Supprimer la demande",
+                        message: "Voulez-vous vraiment supprimer cette demande ?",
+                        confirmLabel: "Oui, supprimer",
+                        action: () => void deleteRequest(booking.id),
+                      })
+                    }
                   >
                     {actionLoadingId === booking.id ? "..." : "Supprimer"}
                   </button>
@@ -722,6 +754,19 @@ export default function LongTermBookingsPage() {
           })}
         </section>
       )}
+
+      <ConfirmModal
+        open={!!confirmAction}
+        title={confirmAction?.title}
+        message={confirmAction?.message ?? ""}
+        confirmLabel={confirmAction?.confirmLabel ?? "Confirmer"}
+        cancelLabel="Annuler"
+        onConfirm={() => {
+          confirmAction?.action();
+          setConfirmAction(null);
+        }}
+        onCancel={() => setConfirmAction(null)}
+      />
     </div>
   );
 }

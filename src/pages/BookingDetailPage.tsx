@@ -1,5 +1,6 @@
   import { useEffect, useMemo, useState } from "react";
   import { Link, useNavigate, useParams } from "react-router-dom";
+  import ConfirmModal from "../components/ConfirmModal";
   import { adminFetch } from "../services/adminFetch";
   import "../styles/bookings-page.css";
 import "../styles/booking-detail-page.css";
@@ -451,6 +452,12 @@ import "../styles/booking-detail-page.css";
     const [actionLoading, setActionLoading] = useState(false);
     const [actionError, setActionError] = useState("");
     const [imageFailed, setImageFailed] = useState(false);
+    const [confirmAction, setConfirmAction] = useState<null | {
+      title: string;
+      message: string;
+      confirmLabel: string;
+      action: () => void;
+    }>(null);
 
     async function loadBooking() {
       try {
@@ -530,6 +537,15 @@ import "../styles/booking-detail-page.css";
       } finally {
         setActionLoading(false);
       }
+    }
+
+    function openConfirm(action: {
+      title: string;
+      message: string;
+      confirmLabel: string;
+      action: () => void;
+    }) {
+      setConfirmAction(action);
     }
 
     const normalizedStatus = useMemo(() => normalizeStatus(booking?.status), [booking?.status]);
@@ -1062,7 +1078,14 @@ import "../styles/booking-detail-page.css";
                 type="button"
                 className="bdp-btn bdp-btn--confirm"
                 disabled={actionLoading}
-                onClick={() => updateBookingStatus(2)}
+                onClick={() =>
+                  openConfirm({
+                    title: "Confirmer la réservation",
+                    message: "Voulez-vous vraiment confirmer cette réservation ?",
+                    confirmLabel: "Oui, confirmer",
+                    action: () => void updateBookingStatus(2),
+                  })
+                }
               >
                 <span className="bdp-btn__icon"><IconCheck /></span>
                 {actionLoading ? "Traitement…" : "Confirmer la réservation"}
@@ -1074,7 +1097,14 @@ import "../styles/booking-detail-page.css";
                 type="button"
                 className="bdp-btn bdp-btn--cancel"
                 disabled={actionLoading}
-                onClick={() => updateBookingStatus(3)}
+                onClick={() =>
+                  openConfirm({
+                    title: "Annuler la réservation",
+                    message: "Voulez-vous vraiment annuler cette réservation ?",
+                    confirmLabel: "Oui, annuler",
+                    action: () => void updateBookingStatus(3),
+                  })
+                }
               >
                 <span className="bdp-btn__icon"><IconX /></span>
                 {actionLoading ? "Traitement…" : "Annuler la réservation"}
@@ -1086,13 +1116,33 @@ import "../styles/booking-detail-page.css";
                 type="button"
                 className="bdp-btn bdp-btn--paid"
                 disabled={actionLoading}
-                onClick={markFullyPaid}
+                onClick={() =>
+                  openConfirm({
+                    title: "Marquer comme soldée",
+                    message: "Voulez-vous vraiment marquer cette réservation comme soldée ?",
+                    confirmLabel: "Oui, marquer soldée",
+                    action: () => void markFullyPaid(),
+                  })
+                }
               >
                 <span className="bdp-btn__icon"><IconDollar /></span>
                 {actionLoading ? "Traitement…" : "Marquer comme soldée"}
               </button>
             )}
           </div>
+
+          <ConfirmModal
+            open={!!confirmAction}
+            title={confirmAction?.title}
+            message={confirmAction?.message ?? ""}
+            confirmLabel={confirmAction?.confirmLabel ?? "Confirmer"}
+            cancelLabel="Annuler"
+            onConfirm={() => {
+              confirmAction?.action();
+              setConfirmAction(null);
+            }}
+            onCancel={() => setConfirmAction(null)}
+          />
         </div>
       
     );
