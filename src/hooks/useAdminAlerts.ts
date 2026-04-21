@@ -14,9 +14,8 @@ type NewItemsDiff = {
   newTransfers: number;
 };
 
-// 🔥 mets directement ton backend réel pour tester
 const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL || "https://car4rent-backend.onrender.com";
+  import.meta.env.VITE_API_URL || "https://car4rent-backend.onrender.com/api";
 
 let sharedData: PendingAlertsResponse = {
   bookingsCount: 0,
@@ -34,12 +33,13 @@ let firstLoadDone = false;
 
 async function fetchAdminAlerts() {
   const token =
+    localStorage.getItem("admin_access_token") ||
     localStorage.getItem("adminToken") ||
     localStorage.getItem("token") ||
     localStorage.getItem("accessToken");
 
   try {
-    const res = await fetch(`${API_BASE_URL}/api/admin/alerts/pending`, {
+    const res = await fetch(`${API_BASE_URL}/admin/alerts/pending`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -80,7 +80,6 @@ function startPolling() {
   if (pollingStarted) return;
 
   pollingStarted = true;
-
   fetchAdminAlerts();
 
   intervalId = window.setInterval(() => {
@@ -111,21 +110,8 @@ export function useAdminAlerts() {
     listenerRef.current = listener;
     listeners.push(listener);
 
-    // 🔥 important : injecter immédiatement l’état partagé actuel
     setAlerts(sharedData);
-
-    // 🔥 important : démarrer le polling APRÈS avoir ajouté le listener
     startPolling();
-
-    // 🔥 si on a encore 0 partout, on force un refresh direct
-    if (
-      sharedData.bookingsCount === 0 &&
-      sharedData.longTermCount === 0 &&
-      sharedData.transfersCount === 0 &&
-      sharedData.globalTotal === 0
-    ) {
-      fetchAdminAlerts();
-    }
 
     return () => {
       if (listenerRef.current) {
