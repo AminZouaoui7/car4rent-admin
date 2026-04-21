@@ -14,7 +14,9 @@ type NewItemsDiff = {
   newTransfers: number;
 };
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5167";
+// 🔥 mets directement ton backend réel pour tester
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || "https://car4rent-backend.onrender.com";
 
 let sharedData: PendingAlertsResponse = {
   bookingsCount: 0,
@@ -43,7 +45,10 @@ async function fetchAdminAlerts() {
       },
     });
 
-    if (!res.ok) return;
+    if (!res.ok) {
+      console.error("fetchAdminAlerts failed:", res.status, res.statusText);
+      return;
+    }
 
     const data: PendingAlertsResponse = await res.json();
 
@@ -75,6 +80,7 @@ function startPolling() {
   if (pollingStarted) return;
 
   pollingStarted = true;
+
   fetchAdminAlerts();
 
   intervalId = window.setInterval(() => {
@@ -94,10 +100,9 @@ export function useAdminAlerts() {
     newTransfers: 0,
   });
 
-const listenerRef = useRef<((data: PendingAlertsResponse, diff: NewItemsDiff) => void) | null>(null);
-  useEffect(() => {
-    startPolling();
+  const listenerRef = useRef<((data: PendingAlertsResponse, diff: NewItemsDiff) => void) | null>(null);
 
+  useEffect(() => {
     const listener = (data: PendingAlertsResponse, incomingDiff: NewItemsDiff) => {
       setAlerts(data);
       setDiff(incomingDiff);
@@ -105,6 +110,22 @@ const listenerRef = useRef<((data: PendingAlertsResponse, diff: NewItemsDiff) =>
 
     listenerRef.current = listener;
     listeners.push(listener);
+
+    // 🔥 important : injecter immédiatement l’état partagé actuel
+    setAlerts(sharedData);
+
+    // 🔥 important : démarrer le polling APRÈS avoir ajouté le listener
+    startPolling();
+
+    // 🔥 si on a encore 0 partout, on force un refresh direct
+    if (
+      sharedData.bookingsCount === 0 &&
+      sharedData.longTermCount === 0 &&
+      sharedData.transfersCount === 0 &&
+      sharedData.globalTotal === 0
+    ) {
+      fetchAdminAlerts();
+    }
 
     return () => {
       if (listenerRef.current) {
