@@ -2198,3 +2198,61 @@ a {
     box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
   }
 }
+.admin-bell {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: white;
+  color: var(--navy);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.admin-bell:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-strong);
+  background: #f8fbff;
+}
+
+.admin-bell-icon {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.admin-bell-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: #ef4444;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12);
+  animation: adminBellPulse 1.6s infinite;
+}
+
+@keyframes adminBellPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.35);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(239, 68, 68, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+  }
+}

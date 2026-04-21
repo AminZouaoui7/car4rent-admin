@@ -3,22 +3,13 @@ import { useNavigate } from "react-router-dom";
 import ConfirmModal from "./ConfirmModal";
 import Alert from "./Alert";
 import { removeAdminToken } from "../services/authService";
-
-type PendingAlertsResponse = {
-  bookingsCount: number;
-  longTermCount: number;
-  transfersCount: number;
-  reservationsTotal: number;
-  globalTotal: number;
-};
+import { useAdminAlerts } from "../hooks/useAdminAlerts";
 
 type ToastState = {
   visible: boolean;
   message: string;
   targetPath: string;
 };
-
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5167";
 
 export default function AdminNavbar() {
   const today = new Date().toLocaleDateString("fr-FR", {
@@ -35,11 +26,9 @@ export default function AdminNavbar() {
     targetPath: "",
   });
 
-  const previousCountsRef = useRef<PendingAlertsResponse | null>(null);
-  const firstLoadRef = useRef(true);
   const toastTimeoutRef = useRef<number | null>(null);
-
   const navigate = useNavigate();
+  const { alerts, diff } = useAdminAlerts();
 
   const confirmLogout = useCallback(() => {
     removeAdminToken();
@@ -49,12 +38,12 @@ export default function AdminNavbar() {
   const playNotificationSound = useCallback(() => {
     try {
       const AudioContextClass =
-        window.AudioContext || (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+        window.AudioContext ||
+        (window as Window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
 
       if (!AudioContextClass) return;
 
       const audioContext = new AudioContextClass();
-
       const oscillator = audioContext.createOscillator();
       const gainNode = audioContext.createGain();
 
@@ -62,7 +51,7 @@ export default function AdminNavbar() {
       oscillator.frequency.setValueAtTime(880, audioContext.currentTime);
 
       gainNode.gain.setValueAtTime(0.0001, audioContext.currentTime);
-      gainNode.gain.exponentialRampToValueAtTime(0.06, audioContext.currentTime + 0.01);
+      gainNode.gain.exponentialRampToValueAtTime(0.05, audioContext.currentTime + 0.01);
       gainNode.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + 0.28);
 
       oscillator.connect(gainNode);
@@ -75,7 +64,7 @@ export default function AdminNavbar() {
         audioContext.close().catch(() => {});
       };
     } catch (error) {
-      console.error("Impossible de jouer le son de notification :", error);
+      console.error("Impossible de jouer le son :", error);
     }
   }, []);
 
@@ -116,78 +105,58 @@ export default function AdminNavbar() {
     navigate(toast.targetPath);
   }, [navigate, toast.targetPath]);
 
+  const handleBellClick = useCallback(() => {
+    if (alerts.transfersCount > 0) {
+      navigate("/admin/transfers");
+      return;
+    }
+
+    if (alerts.longTermCount > 0) {
+      navigate("/admin/long-term-bookings");
+      return;
+    }
+
+    navigate("/admin/bookings");
+  }, [alerts.transfersCount, alerts.longTermCount, navigate]);
+
   useEffect(() => {
-    const token =
-      localStorage.getItem("adminToken") ||
-      localStorage.getItem("token") ||
-      localStorage.getItem("accessToken");
+    if (diff.newBookings > 0) {
+      showToast(
+        diff.newBookings === 1
+          ? "Nouvelle réservation simple"
+          : `${diff.newBookings} nouvelles réservations simples`,
+        "/admin/bookings"
+      );
+      return;
+    }
 
-    const fetchAlerts = async () => {
-      try {
-        const res = await fetch(`${API_BASE_URL}/api/admin/alerts/pending`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+    if (diff.newLongTerms > 0) {
+      showToast(
+        diff.newLongTerms === 1
+          ? "Nouvelle demande longue durée"
+          : `${diff.newLongTerms} nouvelles demandes longue durée`,
+        "/admin/long-term-bookings"
+      );
+      return;
+    }
 
-        if (!res.ok) return;
+    if (diff.newTransfers > 0) {
+      showToast(
+        diff.newTransfers === 1
+          ? "Nouveau transfert"
+          : `${diff.newTransfers} nouveaux transferts`,
+        "/admin/transfers"
+      );
+    }
+  }, [diff, showToast]);
 
-        const data: PendingAlertsResponse = await res.json();
-
-        if (firstLoadRef.current) {
-          previousCountsRef.current = data;
-          firstLoadRef.current = false;
-          return;
-        }
-
-        const previous = previousCountsRef.current;
-
-        if (previous) {
-          const newBookings = data.bookingsCount - previous.bookingsCount;
-          const newLongTerms = data.longTermCount - previous.longTermCount;
-          const newTransfers = data.transfersCount - previous.transfersCount;
-
-          if (newBookings > 0) {
-            showToast(
-              newBookings === 1
-                ? "Nouvelle réservation simple"
-                : `${newBookings} nouvelles réservations simples`,
-              "/admin/bookings"
-            );
-          } else if (newLongTerms > 0) {
-            showToast(
-              newLongTerms === 1
-                ? "Nouvelle demande longue durée"
-                : `${newLongTerms} nouvelles demandes longue durée`,
-              "/admin/long-term-bookings"
-            );
-          } else if (newTransfers > 0) {
-            showToast(
-              newTransfers === 1
-                ? "Nouveau transfert"
-                : `${newTransfers} nouveaux transferts`,
-              "/admin/transfers"
-            );
-          }
-        }
-
-        previousCountsRef.current = data;
-      } catch (error) {
-        console.error("Erreur alertes navbar:", error);
-      }
-    };
-
-    fetchAlerts();
-
-    const interval = window.setInterval(fetchAlerts, 8000);
-
+  useEffect(() => {
     return () => {
-      window.clearInterval(interval);
       if (toastTimeoutRef.current) {
         window.clearTimeout(toastTimeoutRef.current);
       }
     };
-  }, [showToast]);
+  }, []);
 
   return (
     <>
@@ -199,6 +168,22 @@ export default function AdminNavbar() {
         </div>
 
         <div className="admin-navbar-right">
+          <button
+            type="button"
+            className="admin-bell"
+            onClick={handleBellClick}
+            aria-label="Voir les alertes"
+            title="Voir les alertes"
+          >
+            <span className="admin-bell-icon">🔔</span>
+
+            {alerts.globalTotal > 0 && (
+              <span className="admin-bell-badge">
+                {alerts.globalTotal > 99 ? "99+" : alerts.globalTotal}
+              </span>
+            )}
+          </button>
+
           <div className="admin-date-chip">
             <span className="admin-date-dot" />
             <span>{today}</span>
