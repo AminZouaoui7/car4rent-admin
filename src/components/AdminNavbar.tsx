@@ -11,7 +11,12 @@ type ToastState = {
   targetPath: string;
 };
 
-export default function AdminNavbar() {
+type AdminNavbarProps = {
+  isSidebarOpen: boolean;
+  onToggleSidebar: () => void;
+};
+
+export default function AdminNavbar({ isSidebarOpen, onToggleSidebar }: AdminNavbarProps) {
   const today = new Date().toLocaleDateString("fr-FR", {
     weekday: "long",
     day: "numeric",
@@ -161,6 +166,21 @@ export default function AdminNavbar() {
   return (
     <>
       <header className="admin-navbar">
+        <button
+          type="button"
+          className={`admin-hamburger mobile-only ${isSidebarOpen ? "is-open" : ""}`}
+          onClick={onToggleSidebar}
+          aria-label={isSidebarOpen ? "Fermer le menu" : "Ouvrir le menu"}
+          aria-expanded={isSidebarOpen}
+          aria-controls="admin-sidebar"
+        >
+          <span className="admin-hamburger-box" aria-hidden="true">
+            <span />
+            <span />
+            <span />
+          </span>
+        </button>
+
         <div className="admin-navbar-left">
           <span className="admin-navbar-kicker">Panneau d’administration</span>
           <h1>Car4Rent Admin</h1>

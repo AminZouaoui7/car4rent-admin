@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import ConfirmModal from "../components/ConfirmModal";
 import { adminFetch } from "../services/adminFetch";
 import "../styles/bookings-page.css";
 
@@ -150,12 +149,6 @@ export default function LongTermBookingDetailPage() {
   const [error, setError] = useState("");
   const [actionError, setActionError] = useState("");
   const [actionLoading, setActionLoading] = useState(false);
-  const [confirmAction, setConfirmAction] = useState<null | {
-    title: string;
-    message: string;
-    confirmLabel: string;
-    action: () => void;
-  }>(null);
 
   const [quoteForm, setQuoteForm] = useState<QuoteFormState>({
     proposedMonthlyPrice: "",
@@ -244,15 +237,6 @@ export default function LongTermBookingDetailPage() {
     } finally {
       setActionLoading(false);
     }
-  }
-
-  function openConfirm(action: {
-    title: string;
-    message: string;
-    confirmLabel: string;
-    action: () => void;
-  }) {
-    setConfirmAction(action);
   }
 
   async function saveQuote() {
@@ -534,14 +518,7 @@ export default function LongTermBookingDetailPage() {
                 type="button"
                 className="btn-confirm"
                 disabled={actionLoading || normalizedStatus === "approved"}
-                onClick={() =>
-                  openConfirm({
-                    title: "Approuver la demande",
-                    message: "Voulez-vous vraiment approuver cette demande ?",
-                    confirmLabel: "Oui, approuver",
-                    action: () => void updateStatus("Approved"),
-                  })
-                }
+                onClick={() => updateStatus("Approved")}
               >
                 {actionLoading ? "Traitement..." : "Approuver"}
               </button>
@@ -550,32 +527,12 @@ export default function LongTermBookingDetailPage() {
                 type="button"
                 className="btn-cancel"
                 disabled={actionLoading || normalizedStatus === "rejected"}
-                onClick={() =>
-                  openConfirm({
-                    title: "Refuser la demande",
-                    message: "Voulez-vous vraiment refuser cette demande ?",
-                    confirmLabel: "Oui, refuser",
-                    action: () => void updateStatus("Rejected"),
-                  })
-                }
+                onClick={() => updateStatus("Rejected")}
               >
                 {actionLoading ? "Traitement..." : "Refuser"}
               </button>
             </div>
           </article>
-
-          <ConfirmModal
-            open={!!confirmAction}
-            title={confirmAction?.title}
-            message={confirmAction?.message ?? ""}
-            confirmLabel={confirmAction?.confirmLabel ?? "Confirmer"}
-            cancelLabel="Annuler"
-            onConfirm={() => {
-              confirmAction?.action();
-              setConfirmAction(null);
-            }}
-            onCancel={() => setConfirmAction(null)}
-          />
         </div>
       </section>
     </div>

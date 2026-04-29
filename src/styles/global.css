@@ -17,7 +17,7 @@
 }
 
 html {
-  font-size: 10px;
+  font-size: 13px;
 }
 
 html,
@@ -123,7 +123,7 @@ textarea {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 10px 8px;
+  padding: 18px 14px;
   background: linear-gradient(180deg, #062a4b 0%, #073457 48%, #094371 100%);
   color: white;
   box-shadow: 10px 0 28px rgba(6, 42, 75, 0.18);
@@ -149,14 +149,14 @@ textarea {
 .admin-brand {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 6px 4px 12px;
+  gap: 12px;
+  padding: 8px 6px 18px;
   animation: fadeSlideIn 0.65s ease;
 }
 
 .admin-brand-logo-wrap {
-  width: 48px;
-  height: 48px;
+  width: 56px;
+  height: 56px;
   border-radius: 16px;
   display: flex;
   align-items: center;
@@ -167,15 +167,15 @@ textarea {
 }
 
 .admin-brand-logo {
-  width: 32px;
-  height: 32px;
+  width: 38px;
+  height: 38px;
   object-fit: contain;
   filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.2));
 }
 
 .admin-brand-text h2 {
   margin: 0;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 800;
   letter-spacing: 0.2px;
 }
@@ -183,25 +183,25 @@ textarea {
 .admin-brand-text span {
   display: block;
   margin-top: 4px;
-  font-size: 10px;
+  font-size: 11px;
   color: rgba(255, 255, 255, 0.76);
 }
 
 .admin-menu {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-top: 10px;
+  gap: 10px;
+  margin-top: 14px;
 }
 
 .admin-menu-link {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 10px 12px;
+  padding: 12px 14px;
   border-radius: 14px;
   color: #ecf5ff;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
   border: 1px solid transparent;
   transition: transform 0.24s ease, background 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
@@ -224,7 +224,7 @@ textarea {
   width: 18px;
   display: inline-flex;
   justify-content: center;
-  font-size: 11px;
+  font-size: 12px;
   opacity: 0.9;
 }
 
@@ -249,7 +249,7 @@ textarea {
   background: white;
   color: var(--navy);
   font-weight: 800;
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .admin-user-text {
@@ -258,11 +258,11 @@ textarea {
 }
 
 .admin-user-text strong {
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .admin-user-text span {
-  font-size: 9px;
+  font-size: 10px;
   color: rgba(255, 255, 255, 0.72);
 }
 
@@ -274,7 +274,7 @@ textarea {
   background: white;
   color: var(--navy);
   font-weight: 700;
-  font-size: 12px;
+  font-size: 13px;
   cursor: pointer;
   box-shadow: 0 10px 18px rgba(0, 0, 0, 0.12);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -295,8 +295,8 @@ textarea {
 }
 
 .admin-navbar {
-  min-height: 66px;
-  padding: 12px 16px;
+  min-height: 78px;
+  padding: 16px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -316,7 +316,7 @@ textarea {
 }
 
 .admin-navbar-kicker {
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 800;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -325,14 +325,14 @@ textarea {
 
 .admin-navbar h1 {
   margin: 0;
-  font-size: 15px;
+  font-size: 16px;
   color: var(--navy);
   line-height: 1.08;
 }
 
 .admin-navbar p {
   margin: 0;
-  font-size: 11px;
+  font-size: 12px;
   color: #6e8398;
 }
 
@@ -340,13 +340,13 @@ textarea {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 8px 10px;
+  padding: 10px 14px;
   border-radius: 999px;
   background: white;
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
   color: var(--navy);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
 }
 
@@ -360,14 +360,14 @@ textarea {
 
 .admin-content {
   flex: 1;
-  padding: 12px;
+  padding: 22px;
 }
 
 .admin-content-inner {
   width: 100%;
   max-width: none;
   margin: 0;
-  padding: 10px 12px;
+  padding: 18px 22px;
 }
 
 /* ========================================
@@ -377,7 +377,7 @@ textarea {
 .dashboard-page {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 18px;
 }
 
 .dashboard-hero {
@@ -386,8 +386,8 @@ textarea {
   display: flex;
   align-items: stretch;
   justify-content: space-between;
-  gap: 12px;
-  padding: 12px;
+  gap: 18px;
+  padding: 22px;
   border-radius: 22px;
   background: linear-gradient(135deg, #062a4b 0%, #094371 65%, #1c6aa8 100%);
   color: white;
@@ -424,8 +424,8 @@ textarea {
 
 .dashboard-hero-content span {
   display: inline-block;
-  margin-bottom: 6px;
-  font-size: 9px;
+  margin-bottom: 8px;
+  font-size: 10px;
   font-weight: 800;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -433,15 +433,15 @@ textarea {
 }
 
 .dashboard-hero-content h2 {
-  margin: 0 0 8px;
-  font-size: 20px;
+  margin: 0 0 10px;
+  font-size: 24px;
   line-height: 1.08;
 }
 
 .dashboard-hero-content p {
   margin: 0;
   max-width: 720px;
-  font-size: 10px;
+  font-size: 12px;
   color: rgba(255, 255, 255, 0.86);
 }
 
@@ -453,7 +453,7 @@ textarea {
 
 .hero-metric {
   width: 100%;
-  padding: 12px;
+  padding: 18px 16px;
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.14);
@@ -463,26 +463,26 @@ textarea {
 
 .hero-metric strong {
   display: block;
-  font-size: 24px;
+  font-size: 30px;
   line-height: 1;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 
 .hero-metric span {
-  font-size: 10px;
+  font-size: 12px;
   color: rgba(255, 255, 255, 0.82);
 }
 
 .dashboard-stats {
   display: grid;
   grid-template-columns: repeat(3, minmax(180px, 1fr));
-  gap: 12px;
+  gap: 16px;
 }
 
 .dashboard-stats-grid {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 10px;
+  gap: 14px;
 }
 
 .stat-card,
@@ -493,7 +493,7 @@ textarea {
   backdrop-filter: blur(8px);
   border: 1px solid rgba(221, 232, 243, 0.95);
   border-radius: 20px;
-  padding: 14px;
+  padding: 18px;
   box-shadow: var(--shadow);
   transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.18s ease;
 }
@@ -525,13 +525,13 @@ textarea {
 .dashboard-stat-label {
   display: block;
   margin-bottom: 10px;
-  font-size: 11px;
+  font-size: 12px;
   color: #6f8599;
 }
 
 .stat-card-value,
 .dashboard-stat-card strong {
-  font-size: 24px;
+  font-size: 28px;
   line-height: 1;
   font-weight: 800;
   color: var(--navy);
@@ -540,14 +540,14 @@ textarea {
 }
 
 .stat-card-subtext {
-  font-size: 10px;
+  font-size: 11px;
   color: #7f93a5;
 }
 
 .dashboard-grid {
   display: grid;
   grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr);
-  gap: 12px;
+  gap: 16px;
 }
 
 .dashboard-panel {
@@ -555,24 +555,24 @@ textarea {
   backdrop-filter: blur(8px);
   border: 1px solid rgba(221, 232, 243, 0.95);
   border-radius: 20px;
-  padding: 14px;
+  padding: 18px;
   box-shadow: var(--shadow);
 }
 
 .dashboard-panel h3 {
-  margin: 0 0 10px;
-  font-size: 14px;
+  margin: 0 0 14px;
+  font-size: 16px;
   color: var(--navy);
 }
 
 .dashboard-panel-small {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .quick-info-card {
-  padding: 12px;
+  padding: 14px;
   border-radius: 16px;
   background: #f7fbff;
   border: 1px solid #e3edf6;
@@ -580,28 +580,28 @@ textarea {
 
 .quick-info-label {
   display: block;
-  font-size: 10px;
+  font-size: 11px;
   color: #70859a;
   margin-bottom: 6px;
 }
 
 .quick-info-value {
   display: block;
-  font-size: 16px;
+  font-size: 18px;
   color: var(--navy);
   margin-bottom: 6px;
 }
 
 .quick-info-card p {
   margin: 0;
-  font-size: 10px;
+  font-size: 11px;
   color: #7c90a2;
 }
 
 .dashboard-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 .dashboard-list-item {
@@ -609,7 +609,7 @@ textarea {
   align-items: center;
   justify-content: space-between;
   gap: 14px;
-  padding: 12px;
+  padding: 14px;
   border-radius: 16px;
   background: linear-gradient(180deg, #fbfdff 0%, #f6fbff 100%);
   border: 1px solid #e4edf5;
@@ -630,11 +630,11 @@ textarea {
 .dashboard-list-title {
   font-weight: 700;
   color: var(--text);
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .dashboard-list-subtitle {
-  font-size: 10px;
+  font-size: 11px;
   color: #76899c;
 }
 
@@ -712,12 +712,12 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 14px;
+  gap: 24px;
 }
 
 .bookings-hero-badge {
   min-width: 130px;
-  padding: 12px 14px;
+  padding: 18px 20px;
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.14);
   color: #fff;
@@ -727,20 +727,20 @@ textarea {
 
 .bookings-hero-badge strong {
   display: block;
-  font-size: 22px;
+  font-size: 28px;
   line-height: 1;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 
 .bookings-hero-badge span {
-  font-size: 11px;
+  font-size: 13px;
   opacity: 0.95;
 }
 
 .bookings-kicker {
   display: inline-block;
-  margin-bottom: 6px;
-  font-size: 9px;
+  margin-bottom: 8px;
+  font-size: 10px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -749,28 +749,28 @@ textarea {
 
 .bookings-hero h2 {
   margin: 0 0 8px;
-  font-size: 20px;
+  font-size: 24px;
 }
 
 .bookings-hero p {
   margin: 0;
   max-width: 760px;
   color: rgba(255, 255, 255, 0.88);
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .bookings-stats,
 .bookings-stats--modern {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 12px;
+  gap: 18px;
 }
 
 .bookings-toolbar {
   display: grid;
   grid-template-columns: minmax(0, 2fr) minmax(220px, 320px);
-  gap: 12px;
-  padding: 12px;
+  gap: 16px;
+  padding: 18px;
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.86);
   border: 1px solid rgba(221, 232, 243, 0.95);
@@ -779,13 +779,13 @@ textarea {
 
 .bookings-toolbar--modern {
   display: grid;
-  gap: 12px;
+  gap: 16px;
 }
 
 .bookings-toolbar-top {
   display: grid;
   grid-template-columns: minmax(0, 1.5fr) auto;
-  gap: 12px;
+  gap: 18px;
   align-items: end;
 }
 
@@ -803,7 +803,7 @@ textarea {
 
 .bookings-search label,
 .bookings-filter label {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
   color: #6e8398;
 }
@@ -814,12 +814,12 @@ textarea {
 .bookings-filter--modern select,
 .bookings-search-box input,
 .bookings-toolbar-actions select {
-  height: 38px;
+  height: 42px;
   border-radius: 12px;
   border: 1px solid #d9e6f2;
   background: #f9fcff;
   padding: 0 12px;
-  font-size: 11px;
+  font-size: 12px;
   color: #102a43;
   outline: none;
   transition: 0.2s ease;
@@ -827,7 +827,7 @@ textarea {
 
 .bookings-search--modern input,
 .bookings-filter--modern select {
-  height: 42px;
+  height: 48px;
   border-radius: 14px;
 }
 

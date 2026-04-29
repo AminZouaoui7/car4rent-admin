@@ -1,9 +1,14 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import logoCar4Rent from "../assets/logo-car4rent.png";
 import { useAdminAlerts } from "../hooks/useAdminAlerts";
 
-export default function AdminSidebar() {
+type AdminSidebarProps = {
+  isOpen: boolean;
+  onClose: () => void;
+};
+
+export default function AdminSidebar({ isOpen, onClose }: AdminSidebarProps) {
   const location = useLocation();
   const { alerts } = useAdminAlerts();
 
@@ -18,8 +23,17 @@ export default function AdminSidebar() {
 
   const badgeClassName = "admin-badge admin-badge--pulse";
 
+  useEffect(() => {
+    if (isReservationsSectionActive) {
+      setIsReservationsOpen(true);
+    }
+  }, [isReservationsSectionActive]);
+
   return (
-    <aside className="admin-sidebar">
+    <aside
+      id="admin-sidebar"
+      className={`admin-sidebar ${isOpen ? "admin-sidebar--open" : ""}`}
+    >
       <div className="admin-sidebar-top">
         <div className="admin-brand">
           <div className="admin-brand-logo-wrap">
@@ -33,22 +47,22 @@ export default function AdminSidebar() {
         </div>
 
         <nav className="admin-menu">
-          <NavLink to="/admin/dashboard" className="admin-menu-link">
+          <NavLink to="/admin/dashboard" className="admin-menu-link" onClick={onClose}>
             <span className="menu-icon">◉</span>
             <span>Dashboard</span>
           </NavLink>
 
-          <NavLink to="/admin/vehicles" className="admin-menu-link">
+          <NavLink to="/admin/vehicles" className="admin-menu-link" onClick={onClose}>
             <span className="menu-icon">◈</span>
             <span>Véhicules</span>
           </NavLink>
 
-          <NavLink to="/admin/tariffs" className="admin-menu-link">
+          <NavLink to="/admin/tariffs" className="admin-menu-link" onClick={onClose}>
             <span className="menu-icon">◌</span>
             <span>Tarifs & saisons</span>
           </NavLink>
 
-          <NavLink to="/admin/pricing-rules" className="admin-menu-link">
+          <NavLink to="/admin/pricing-rules" className="admin-menu-link" onClick={onClose}>
             <span className="menu-icon">◍</span>
             <span>Pricing rules</span>
           </NavLink>
@@ -80,6 +94,7 @@ export default function AdminSidebar() {
                   to="/admin/bookings"
                   className="admin-submenu-link"
                   style={{ display: "flex", alignItems: "center", gap: "10px" }}
+                  onClick={onClose}
                 >
                   <span className="menu-icon">•</span>
                   <span>Réservations simples</span>
@@ -93,6 +108,7 @@ export default function AdminSidebar() {
                   to="/admin/long-term-bookings"
                   className="admin-submenu-link"
                   style={{ display: "flex", alignItems: "center", gap: "10px" }}
+                  onClick={onClose}
                 >
                   <span className="menu-icon">•</span>
                   <span>Réservations longue durée</span>
@@ -109,6 +125,7 @@ export default function AdminSidebar() {
             to="/admin/transfers"
             className="admin-menu-link"
             style={{ display: "flex", alignItems: "center", gap: "10px" }}
+            onClick={onClose}
           >
             <span className="menu-icon">⇄</span>
             <span>Transferts</span>
@@ -118,12 +135,16 @@ export default function AdminSidebar() {
             )}
           </NavLink>
 
-          <NavLink to="/admin/promo-codes" className="admin-menu-link">
+          <NavLink to="/admin/promo-codes" className="admin-menu-link" onClick={onClose}>
             <span className="menu-icon">⬢</span>
             <span>Codes promo</span>
           </NavLink>
 
-          <NavLink to="/admin/locations-categories" className="admin-menu-link">
+          <NavLink
+            to="/admin/locations-categories"
+            className="admin-menu-link"
+            onClick={onClose}
+          >
             <span className="menu-icon">⌂</span>
             <span>Villes & catégories</span>
           </NavLink>

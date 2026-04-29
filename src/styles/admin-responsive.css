@@ -1,0 +1,472 @@
+.mobile-only {
+  display: none !important;
+}
+
+.desktop-only {
+  display: inherit !important;
+}
+
+.admin-sidebar-overlay {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .mobile-only {
+    display: initial !important;
+  }
+
+  .desktop-only {
+    display: none !important;
+  }
+
+  body.admin-mobile-menu-open {
+    overflow: hidden;
+  }
+
+  .admin-shell {
+    overflow-x: clip;
+  }
+
+  .admin-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: min(320px, 88vw);
+    min-height: 100vh;
+    height: 100vh;
+    padding: 18px 12px;
+    z-index: 40;
+    transform: translateX(-100%);
+    transition: transform 0.28s ease, box-shadow 0.28s ease;
+    box-shadow: none;
+  }
+
+  .admin-sidebar.admin-sidebar--open {
+    transform: translateX(0);
+    box-shadow: 10px 0 30px rgba(6, 42, 75, 0.24);
+  }
+
+  .admin-sidebar-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    border: none;
+    padding: 0;
+    background: rgba(6, 20, 35, 0.42);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.24s ease, visibility 0.24s ease;
+    z-index: 35;
+  }
+
+  .admin-shell--sidebar-open .admin-sidebar-overlay {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .admin-main {
+    width: 100%;
+  }
+
+  .admin-navbar {
+    padding: 14px 16px;
+    gap: 14px;
+    z-index: 25;
+  }
+
+  .admin-navbar-left {
+    min-width: 0;
+  }
+
+  .admin-navbar-right {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .admin-hamburger {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: #fff;
+    color: var(--navy);
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+  }
+
+  .admin-hamburger-box {
+    width: 18px;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .admin-hamburger-box span {
+    width: 100%;
+    height: 2px;
+    border-radius: 999px;
+    background: currentColor;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .admin-hamburger.is-open .admin-hamburger-box span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+
+  .admin-hamburger.is-open .admin-hamburger-box span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .admin-hamburger.is-open .admin-hamburger-box span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  .admin-bell,
+  .admin-logout-btn,
+  .admin-date-chip,
+  .btn-confirm,
+  .btn-cancel,
+  .btn-secondary,
+  .btn-danger,
+  .action-btn,
+  .btn-neutral,
+  .promo-primary-btn,
+  .promo-secondary-btn,
+  .promo-danger-btn,
+  .promo-action-btn,
+  .vehicles-admin-primary-btn,
+  .vehicle-secondary-btn,
+  .vehicle-action-btn,
+  .transfers-primary-btn,
+  .transfers-secondary-btn,
+  .transfers-action-btn,
+  .tariffs-primary-btn,
+  .tariffs-secondary-btn,
+  .tariffs-action-btn,
+  .pricing-rule-primary-btn,
+  .pricing-rule-secondary-btn,
+  .crud-primary-btn,
+  .crud-action-btn,
+  .dashboard-btn,
+  .flow-tab-premium,
+  .tab-btn,
+  .quick-filter {
+    min-height: 44px;
+  }
+
+  .admin-content {
+    padding: 16px;
+  }
+
+  .admin-content-inner {
+    padding: 0;
+  }
+
+  .bookings-page-v2,
+  .dashboard-premium-page {
+    max-width: 100%;
+    margin: 8px auto 16px;
+    padding: 14px;
+  }
+
+  .bookings-header,
+  .vehicles-admin-hero,
+  .promo-hero,
+  .tariffs-admin-hero,
+  .transfers-hero,
+  .crud-hero,
+  .dashboard-premium-hero,
+  .dashboard-panel-premium__head,
+  .bookings-panel-head,
+  .promo-table-head,
+  .transfers-modal__header,
+  .vehicle-modal-header,
+  .promo-modal-header,
+  .tariffs-modal__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .bookings-header-right,
+  .bookings-toolbar-actions,
+  .vehicles-admin-filters,
+  .promo-toolbar__actions,
+  .promo-actions,
+  .tariffs-row-actions,
+  .transfers-row-actions,
+  .bdp-actions,
+  .vehicle-actions,
+  .longterm-card__actions,
+  .dashboard-premium-hero__actions,
+  .flow-tabs-premium,
+  .dashboard-chip-stats {
+    width: 100%;
+  }
+
+  .bookings-toolbar-v2,
+  .vehicles-admin-toolbar,
+  .promo-toolbar,
+  .crud-toolbar,
+  .bookings-toolbar,
+  .bookings-toolbar-top,
+  .tariffs-layout,
+  .dashboard-premium-grid,
+  .dashboard-kpi-showcase,
+  .payment-premium-layout,
+  .longterm-detail-grid,
+  .bdp-hero,
+  .bdp-detail-grid,
+  .vehicle-form-grid,
+  .vehicle-details-grid,
+  .promo-form-grid,
+  .pricing-rule-form__grid,
+  .transfers-detail-grid,
+  .bookings-toolbar-actions,
+  .tariffs-form-card__grid--season,
+  .tariffs-form-advanced,
+  .dashboard-kpi-showcase__footer,
+  .dashboard-kpi-showcase__side,
+  .payment-cards-grid,
+  .activity-grid,
+  .hero-glass-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .promo-stats,
+  .transfers-stats,
+  .vehicles-admin-stats,
+  .bookings-stats-grid,
+  .dashboard-top-cards,
+  .dashboard-top-cards--premium,
+  .dashboard-top-cards,
+  .dashboard-stats,
+  .dashboard-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .tariffs-list-item,
+  .recent-booking-card__top,
+  .recent-booking-card__bottom,
+  .timeline-premium__top,
+  .dashboard-list-item,
+  .longterm-card,
+  .longterm-card__head,
+  .transfers-list-item,
+  .bookings-hero-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .longterm-card {
+    grid-template-columns: 1fr;
+  }
+
+  .longterm-card__pricing,
+  .longterm-card__actions,
+  .bookings-toolbar-actions {
+    gap: 10px;
+  }
+
+  .vehicles-admin-table-wrap,
+  .promo-table-wrap,
+  .crud-table-wrap,
+  .bookings-table-wrap,
+  .bookings-table-wrap--modern,
+  .bdp-payments-table {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .vehicles-admin-table-card,
+  .promo-table-card,
+  .crud-card,
+  .bookings-panel,
+  .bookings-panel--modern,
+  .tariffs-list-card,
+  .tariffs-form-card,
+  .transfers-list-card,
+  .transfers-filters-card,
+  .pricing-rule-modal,
+  .vehicle-modal,
+  .promo-modal,
+  .promo-delete-modal,
+  .transfers-modal,
+  .tariffs-modal,
+  .booking-modal {
+    border-radius: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-navbar {
+    padding: 12px 14px;
+  }
+
+  .admin-navbar-right {
+    gap: 8px;
+  }
+
+  .admin-date-chip {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .admin-logout-btn {
+    justify-content: center;
+  }
+
+  .admin-content {
+    padding: 14px;
+  }
+
+  .bookings-page-v2,
+  .dashboard-premium-page {
+    margin: 0;
+    padding: 12px;
+    border-radius: 18px;
+  }
+
+  .bookings-header,
+  .vehicles-admin-hero,
+  .promo-hero,
+  .tariffs-admin-hero,
+  .transfers-hero,
+  .crud-hero,
+  .dashboard-premium-hero,
+  .dashboard-panel-premium,
+  .bookings-panel,
+  .bookings-panel--modern,
+  .vehicles-admin-table-card,
+  .promo-table-card,
+  .transfers-filters-card,
+  .transfers-list-card,
+  .crud-card,
+  .tariffs-form-card,
+  .tariffs-list-card {
+    padding: 16px;
+    border-radius: 18px;
+  }
+
+  .promo-stats,
+  .transfers-stats,
+  .vehicles-admin-stats,
+  .bookings-stats-grid,
+  .dashboard-top-cards,
+  .dashboard-top-cards--premium,
+  .dashboard-stats,
+  .dashboard-stats-grid,
+  .payment-cards-grid,
+  .activity-grid,
+  .hero-glass-grid,
+  .dashboard-kpi-showcase__footer,
+  .dashboard-kpi-showcase__side {
+    grid-template-columns: 1fr !important;
+  }
+
+  .bookings-toolbar-actions,
+  .promo-actions,
+  .vehicle-actions,
+  .longterm-card__actions,
+  .tariffs-row-actions,
+  .transfers-row-actions,
+  .bdp-actions,
+  .promo-modal-footer,
+  .promo-delete-actions,
+  .vehicle-modal-footer,
+  .pricing-rule-modal__footer,
+  .tariffs-modal__footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .bookings-toolbar-actions > *,
+  .promo-actions > *,
+  .vehicle-actions > *,
+  .longterm-card__actions > *,
+  .tariffs-row-actions > *,
+  .transfers-row-actions > *,
+  .bdp-actions > * {
+    width: 100%;
+  }
+
+  .dashboard-premium-hero__content h1,
+  .bookings-header-left h1,
+  .vehicles-admin-hero__content h2,
+  .promo-hero__content h2,
+  .tariffs-admin-hero__content h2,
+  .transfers-hero__content h2 {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-sidebar {
+    width: min(300px, 90vw);
+  }
+
+  .admin-navbar {
+    padding: 10px 12px;
+  }
+
+  .admin-navbar h1 {
+    font-size: 13px;
+  }
+
+  .admin-navbar p,
+  .admin-date-chip,
+  .admin-logout-btn {
+    font-size: 10px;
+  }
+
+  .admin-content {
+    padding: 12px;
+  }
+
+  .bookings-page-v2,
+  .dashboard-premium-page {
+    padding: 10px;
+    border-radius: 16px;
+  }
+
+  .bookings-header,
+  .vehicles-admin-hero,
+  .promo-hero,
+  .tariffs-admin-hero,
+  .transfers-hero,
+  .crud-hero,
+  .dashboard-premium-hero,
+  .dashboard-panel-premium,
+  .bookings-panel,
+  .bookings-panel--modern,
+  .vehicles-admin-table-card,
+  .promo-table-card,
+  .transfers-filters-card,
+  .transfers-list-card,
+  .crud-card,
+  .tariffs-form-card,
+  .tariffs-list-card {
+    padding: 14px;
+    border-radius: 16px;
+  }
+
+  .longterm-card__image,
+  .vehicle-details-image,
+  .bdp-vehicle-media,
+  .longterm-hero-card__image {
+    height: 190px;
+    min-height: 190px;
+  }
+
+  .alert--toast {
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    min-width: 0;
+    max-width: none;
+  }
+}

@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import ConfirmModal from "../components/ConfirmModal";
 import { adminFetch } from "../services/adminFetch";
 import "../styles/bookings-page.css";
 
@@ -257,12 +256,6 @@ export default function BookingsPage() {
   const [sortBy, setSortBy] = useState("priority");
   const [activeTab, setActiveTab] = useState<ViewTab>("today");
   const [actionLoadingId, setActionLoadingId] = useState<string | null>(null);
-  const [confirmAction, setConfirmAction] = useState<null | {
-    title: string;
-    message: string;
-    confirmLabel: string;
-    action: () => void;
-  }>(null);
 
   useEffect(() => {
     loadBookings();
@@ -340,15 +333,6 @@ export default function BookingsPage() {
     } finally {
       setActionLoadingId(null);
     }
-  }
-
-  function openConfirm(action: {
-    title: string;
-    message: string;
-    confirmLabel: string;
-    action: () => void;
-  }) {
-    setConfirmAction(action);
   }
 
   const stats = useMemo(() => {
@@ -774,14 +758,7 @@ export default function BookingsPage() {
                       type="button"
                       className="btn-confirm"
                       disabled={actionLoadingId === booking.id}
-                      onClick={() =>
-                        openConfirm({
-                          title: "Confirmer la réservation",
-                          message: "Voulez-vous vraiment confirmer cette réservation ?",
-                          confirmLabel: "Oui, confirmer",
-                          action: () => void updateBookingStatus(booking.id, 2),
-                        })
-                      }
+                      onClick={() => updateBookingStatus(booking.id, 2)}
                     >
                       {actionLoadingId === booking.id ? "..." : "Confirmer"}
                     </button>
@@ -792,14 +769,7 @@ export default function BookingsPage() {
                       type="button"
                       className="btn-cancel"
                       disabled={actionLoadingId === booking.id}
-                      onClick={() =>
-                        openConfirm({
-                          title: "Annuler la réservation",
-                          message: "Voulez-vous vraiment annuler cette réservation ?",
-                          confirmLabel: "Oui, annuler",
-                          action: () => void updateBookingStatus(booking.id, 3),
-                        })
-                      }
+                      onClick={() => updateBookingStatus(booking.id, 3)}
                     >
                       {actionLoadingId === booking.id ? "..." : "Annuler"}
                     </button>
@@ -810,14 +780,7 @@ export default function BookingsPage() {
                       type="button"
                       className="btn-paid"
                       disabled={actionLoadingId === booking.id}
-                      onClick={() =>
-                        openConfirm({
-                          title: "Marquer comme soldée",
-                          message: "Voulez-vous vraiment marquer cette réservation comme soldée ?",
-                          confirmLabel: "Oui, marquer soldée",
-                          action: () => void markBookingFullyPaid(booking.id),
-                        })
-                      }
+                      onClick={() => markBookingFullyPaid(booking.id)}
                     >
                       {actionLoadingId === booking.id ? "..." : "Soldée"}
                     </button>
@@ -828,19 +791,6 @@ export default function BookingsPage() {
           })}
         </section>
       )}
-
-      <ConfirmModal
-        open={!!confirmAction}
-        title={confirmAction?.title}
-        message={confirmAction?.message ?? ""}
-        confirmLabel={confirmAction?.confirmLabel ?? "Confirmer"}
-        cancelLabel="Annuler"
-        onConfirm={() => {
-          confirmAction?.action();
-          setConfirmAction(null);
-        }}
-        onCancel={() => setConfirmAction(null)}
-      />
     </div>
   );
 }
